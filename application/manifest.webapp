@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "name": "bHacker",
+  "name": "openKaiOS Store",
   "description": "An app to download and install apps",
-  "origin": "app://bhstore.bananahackers.net",
+  "origin": "app://store.openkaios.top",
   "launch_path": "/index.html",
   "type": "certified",
   "fullscreen": "true",
@@ -14,7 +14,7 @@
 
   "developer": {
     "name": "strukturart",
-    "url": "https://strukturart.com"
+    "url": "https://openkaios.top"
   },
 
   "permissions": {

@@ -1,9 +1,8 @@
 const LastUpdateFile =
-  "https://banana-hackers.gitlab.io/store-db/lastUpdate.txt";
+  "https://openkaios.top/openkaios-store-db/lastUpdate.txt";
 
 const server_list = [
-  "https://banana-hackers.gitlab.io/store-db/data.json",
-  "https://bananahackers.github.io/store-db/data.json",
+  "https://openkaios.top/openkaios-store-db/data.json"
 ];
 
 const SimpleRatingServerInstance = "https://bhackers.uber.space/srs/v1";
@@ -163,7 +162,7 @@ const BackendApi = (() => {
     update,
     getData,
     setStatusCallback: (cb) => (statusCallback = cb),
-    count_download,
-    getDownloadCounts,
+    //count_download,
+    //getDownloadCounts,
   };
 })();

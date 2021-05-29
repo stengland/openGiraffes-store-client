@@ -1,7 +1,7 @@
 {
-  "name": "bhackers-store",
+  "name": "openkaios-store",
   "version": "1.0.0",
-  "description": "An client for https://gitlab.com/banana-hackers/store-db",
+  "description": "An client for openKaiOS",
   "main": "index.js",
   "scripts": {
     "formatting:test": "npx prettier --check .",
@@ -11,18 +11,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/strukturart/bHacker-store-client.git"
+    "url": "git+https://github.com/openkaios/openkaios-store-client"
   },
-  "author": "strukturart <https://github.com/strukturart>",
+  "author": "openkaios <https://github.com/openkaios>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/strukturart/bHacker-store-client/issues"
+    "url": "https://github.com/openkaios/openkaios-store-client/issues"
   },
   "devDependencies": {
     "prettier": "2.1.1",
     "terser": "^5.3.0"
   },
-  "homepage": "https://github.com/strukturart/bHacker-store-client#readme",
+  "homepage": "https://github.com/openkaios/openkaios-store-client",
   "dependencies": {
     "mustache": "^4.0.1",
     "simplebar": "^5.3.0"
