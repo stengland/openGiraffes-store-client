@@ -1,57 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>bHacker-store</title>
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: 'unsafe-inline'; connect-src * 'unsafe-inline'; frame-src *;"
-    />
-    <meta charset="utf-8" />
-    <meta http-equiv="Cache-control" Private />
-    <link
-      rel="manifest"
-      href="manifest.webapp"
-      type="application/x-web-app-manifest+json"
-    />
-    <meta
-      name="viewport"
-      content="width=device-width,user-scalable=no,initial-scale=1"
-    />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/grid.css" />
-    <link rel="stylesheet" href="assets/css/qr_reader.css" />
-  </head>
 
-  <body>
-    <div id="wrapper">
-      <div id="toast" class="width-100"></div>
-      <div id="loading">
-        <div id="loading-bar"></div>
+<head>
+  <title>bHacker-store</title>
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: 'unsafe-inline'; connect-src * 'unsafe-inline'; frame-src *;" />
+  <meta charset="utf-8" />
+  <meta http-equiv="Cache-control" Private />
+  <link rel="manifest" href="manifest.webapp" type="application/x-web-app-manifest+json" />
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/grid.css" />
+  <link rel="stylesheet" href="assets/css/qr_reader.css" />
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="toast" class="width-100"></div>
+    <div id="loading">
+      <div id="loading-bar"></div>
+    </div>
+
+    <!---------------->
+    <!--app-list-->
+    <!---------------->
+    <div id="app" class="flex width-100 page">
+      <div id="panels-indicator" class="width-100">
+        <div id="panels-indicator-inner" class="width-100 flex"></div>
       </div>
-
-      <!---------------->
-      <!--app-list-->
-      <!---------------->
-      <div id="app" class="flex width-100 page">
-        <div id="panels-indicator" class="width-100">
-          <div id="panels-indicator-inner" class="width-100 flex"></div>
-        </div>
-        <div id="navigation" class="width-100">
-          <div></div>
-        </div>
-        <div id="app-panels">
-          <div id="app-panels-inner">
-            <article
-              class="All"
-              id="search"
-              class="width-100 flex justify-content-spacearound"
-              tabindex="0"
-            >
-              <input type="search" />
-            </article>
-            <div id="apps"></div>
-            <script id="template" type="x-tmpl-mustache">
-              {{#data}}
+      <div id="navigation" class="width-100">
+        <div></div>
+      </div>
+      <div id="app-panels">
+        <div id="app-panels-inner">
+          <article class="All" id="search" class="width-100 flex justify-content-spacearound" tabindex="0">
+            <input type="search" />
+          </article>
+          <div id="apps"></div>
+          <script id="template" type="x-tmpl-mustache">
+            {{#data}}
               <article tabindex="{{index}}" data-slug="{{slug}}" id="{{slug}}" class="All {{#rating}}ratings{{/rating}} {{category}}" data-name="{{title}}" data-tags="{{tags}}" data-url="{url}" data-download="{{link}}">
                   <div class="icon single-article"><img class="lazyload" data-src="{{icon}}" /></div>
                   <h1 class="article-list">{{title}}</h1>
@@ -114,161 +101,119 @@
 
               {{/data}}
             </script>
-          </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div id="rating-wrapper" class="flex width-100 height-100">
-      <input
-        class="star width-100"
-        tabindex="1"
-        min="0"
-        maxlength="1"
-        size="1"
-        type="tel"
-        autocomplete="off"
-      />
-      <textarea class="text" tabindex="2" rows="5" type="text"></textarea>
-      <div id="stars">
-        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-      </div>
-      <div>Press 1-5 to rate the app and write a comment.</div>
+  <div id="rating-wrapper" class="flex width-100 height-100">
+    <input class="star width-100" tabindex="1" min="0" maxlength="1" size="1" type="tel" autocomplete="off" />
+    <textarea class="text" tabindex="2" rows="5" type="text"></textarea>
+    <div id="stars">
+      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
     </div>
+    <div>Press 1-5 to rate the app and write a comment.</div>
+  </div>
 
-    <div id="bottom-bar">
-      <div class="inner flex justify-content-spacebetween width-100">
-        <div id="button-left"></div>
-        <div id="button-center"></div>
-        <div id="button-right"></div>
-      </div>
+  <div id="bottom-bar">
+    <div class="inner flex justify-content-spacebetween width-100">
+      <div id="button-left"></div>
+      <div id="button-center"></div>
+      <div id="button-right"></div>
     </div>
+  </div>
 
-    <div id="about" class="width-100 height-100">
-      <div id="inner" tabindex="0">
+  <div id="about" class="width-100 height-100">
+    <div id="inner" tabindex="0">
+      <br />
+      <h1 id="top">openKaiOS Store</h1>
+      <p>
+        基于 bHacker Store 的第三方应用商店。
+      </p>
+      <div>
+        <h1>Contributors</h1>
+        <div id="contributors"></div>
+      </div>
+      <div>
+        <h1>Respect</h1>
+        <div>
+          Respect the licenses of the apps, it would be nice if you use app
+          more often to support the developer with a donation.<br />Thanks!
+        </div>
+
+        <h1>隐私政策和使用条款</h1>
+        <p>您的隐私对我们很重要，这就是我们尝试只收集我们需要的数据的原因为您提供服务。</p>
+        <h2>使用应用程序时可能会收集到的数据</h2>
+        <p>我们依靠 GitHub 页面来托管数据，此服务可能会存储 cookie 并保存您的 IP 地址 (<a
+            href='https://docs.github.com/en/github/site-policy/github-privacy-statement' target='_blank'
+            class='url'>https://docs.github.com/en/github/site-policy/github-privacy-statement</a>)</p>
+        <p>我们<strong>只链接</strong>到应用程序包，当然如果部分应用有托管上的问题，我们也提供另外的托管地址，因此在下载应用程序时，您将可以看到您的 IP 地址的第三方服务器下载它们。</p>
+        <p>由我们帮助托管的程序仓库地址：<a href='https://gitee.com/liaronce/openkaios-store-binary' target='_blank'
+            class='url'>https://gitee.com/liaronce/openkaios-store-binary</a></p>
+        <h3>可能与第三方共享的数据</h3>
+        <ul>
+          <li>下载应用程序时的IP地址</li>
+
+        </ul>
+        <h3>下载计数器和评级</h3>
+        <p>使用应用程序时，我们从评级服务器获取所有应用程序的下载计数。此请求可能会被记录，但我们不会明确存储您的 IP 地址。</p>
+        <p>下载应用程序时，将向下载计数器发出请求以增加它，该请求包含：</p>
+        <ul>
+          <li>下载的应用程序的名称</li>
+          <li>下载时间</li>
+          <li>用户的 IP 地址，但目前没有明确保存。</li>
+
+        </ul>
+        <p>在获取应用程序的评级时，服务器获取请求的应用程序名称和 IP 地址，但并未明确保存。</p>
+        <p>在对应用程序进行评分时，我们会将您的昵称和评分存储在我们的服务器上，以便提供服务。</p>
+        <h3>分析</h3>
+        <p>除了计算下载量之外，我们不做任何分析。</p>
+        <p>但是您下载的应用程序可能会这样做、有广告甚至跟踪您。</p>
+        <p>我们尝试标记具有跟踪和广告的应用程序。</p>
+        <h2>责任和保证</h2>
+        <p>该服务由社区维护并尽最大努力提供。</p>
+        <p>我们尽最大努力确保数据正确，但我们不保证信息的正确性。使用此服务的风险由您自行承担。</p>
+        <p>使用此服务即表示您同意<strong>不</strong>让我们对使用此服务或通过此服务下载的应用程序时可能发生的任何损害负责。再次使用此服务的风险由您自行承担！</p>
+        <h2>滥用</h2>
+        <p>如果您发现某个应用侵犯了您的权利或破坏了您的设备，请在 <a href='https://github.com/openkaios/openkaios-store-db/issues'>GitHub 问题</a>
+          上报告</p>
         <br />
-        <h1 id="top">openKaiOS</h1>
-        <p>
-          An alternative app store by free developers for free devices. The
-          database of apps is hosted https://banana-hackers.gitlab.io/store-db ,
-          further can be added by a pull request.
-        </p>
-        <div>
-          <h1>Contributors</h1>
-          <div id="contributors"></div>
-        </div>
-        <div>
-          <h1>Respect</h1>
-          <div>
-            Respect the licenses of the apps, it would be nice if you use app
-            more often to support the developer with a donation.<br />Thanks!
-          </div>
-
-          <h1>Privacy Policy and Terms of use</h1>
-          <p>
-            Your privacy is important to us, that&#39;s why we try to collect
-            only the data that we need to provide the service to you.
-          </p>
-          <h2>Data that might get collected while using the app</h2>
-          <p>
-            We rely on gitlab pages for hosting the data, this service might
-            store cookies and save your ip address
-            <a href="https://about.gitlab.com/privacy/"
-              >https://about.gitlab.com/privacy/</a
-            >
-          </p>
-          <p>
-            We only link to the app packages, we don&#39;t host them ourselves
-            so when downloading apps you will download them from thirdparty
-            servers who can then see your ip address.
-          </p>
-          <h2>Data that might be shared with third paries</h2>
-          <ul>
-            <li>IP address when downloading apps</li>
-          </ul>
-          <h2>Download Counter and ratings</h2>
-          <p>
-            When using the app we fetch the download count for all apps from our
-            ratings server. This request might be logged, but we don&#39;t
-            explicitly store your ip address.
-          </p>
-          <p>
-            When downloading apps a request to the download counter will be made
-            to increase it, this request contains:
-          </p>
-          <ul>
-            <li>The name of the downloaded app</li>
-            <li>the time of the download</li>
-            <li>
-              The IP address of the user, but its not explicitly saved at the
-              moment.
-            </li>
-          </ul>
-          <p>
-            When fetching the ratings for an app the server gets the requested
-            appname and the ip address but it is not explicitly saved.
-          </p>
-          <p>
-            When rating apps we store your nickname and your ratings on our
-            server to make the service possible.
-          </p>
-          <h2>Analytics</h2>
-          <p>
-            Besides from counting downloads we don&#39;t do any analytics. But
-            the apps you download might do it, have ads or even track you. We
-            try to label apps that have tracking and/or advertisement.
-          </p>
-          <h2>Liability &amp; Warranty</h2>
-          <p>
-            This service is community maintained and provided on a best-effort
-            basis. We try our best make sure the data is correct, but we do not
-            give any warranties that the information is correct. Use this
-            service on your own risk.
-          </p>
-          <h2>Abuse</h2>
-          <p>
-            If you see an app that violates you rights or does bad stuff with
-            your device, please report it on
-            <a href="https://gitlab.com/banana-hackers/store-db/-/issues"
-              >gitlab issues</a
-            >
-          </p>
-          <br />
-          <br />
-        </div>
+        <br />
       </div>
-      <div id="update"></div>
     </div>
+    <div id="update"></div>
+  </div>
 
-    <div id="message-box" class="flex width-100 height-100">
-      <img class="icon-1" src="icons/icon.png" onerror="this.src='icon.png'" />
-      <img class="icon-2" src="icons/icon.png" onerror="this.src='icon.png'" />
-    </div>
-    <div id="qr-screen" hidden>
-      <video id="video"></video>
-      <div id="corner-nw"></div>
-      <div id="corner-no"></div>
-      <div id="corner-so"></div>
-      <div id="corner-sw"></div>
-      <div id="startDecoding" hidden>Start Scanning</div>
-    </div>
+  <div id="message-box" class="flex width-100 height-100">
+    <img class="icon-1" src="icons/icon.png" onerror="this.src='icon.png'" />
+    <img class="icon-2" src="icons/icon.png" onerror="this.src='icon.png'" />
+  </div>
+  <div id="qr-screen" hidden>
+    <video id="video"></video>
+    <div id="corner-nw"></div>
+    <div id="corner-no"></div>
+    <div id="corner-so"></div>
+    <div id="corner-sw"></div>
+    <div id="startDecoding" hidden>Start Scanning</div>
+  </div>
 
-    <!-- for local development -->
-    <script src="assets/exclude-js/jsQR.js"></script>
-    <script src="assets/js/scan.js"></script>
-    <script src="assets/js/IntersectionObserver-polyfill.js"></script>
-    <script src="assets/js/jQuery-3.1.0.js"></script>
-    <!---<script src="assets/js/jquery.autocomplete.min.js"></script>-->
-    <script src="assets/js/moments.min.js"></script>
-    <script src="assets/js/mustache.js"></script>
-    <script src="assets/js/helper.js"></script>
-    <script src="assets/js/install.js"></script>
-    <script src="assets/js/search.js"></script>
-    <script src="assets/js/backend_api.js"></script>
-    <script src="assets/js/ratings.js"></script>
-    <script src="assets/js/lazyload.js"></script>
-    <script src="app.js"></script>
-    <!-- for packaged app -->
-    <script src="bundle.min.js"></script>
-  </body>
+  <!-- for local development -->
+  <script src="assets/exclude-js/jsQR.js"></script>
+  <script src="assets/js/scan.js"></script>
+  <script src="assets/js/IntersectionObserver-polyfill.js"></script>
+  <script src="assets/js/jQuery-3.1.0.js"></script>
+  <!---<script src="assets/js/jquery.autocomplete.min.js"></script>-->
+  <script src="assets/js/moments.min.js"></script>
+  <script src="assets/js/mustache.js"></script>
+  <script src="assets/js/helper.js"></script>
+  <script src="assets/js/install.js"></script>
+  <script src="assets/js/search.js"></script>
+  <script src="assets/js/backend_api.js"></script>
+  <script src="assets/js/ratings.js"></script>
+  <script src="assets/js/lazyload.js"></script>
+  <script src="app.js"></script>
+  <!-- for packaged app -->
+  <script src="bundle.min.js"></script>
+</body>
+
 </html>
