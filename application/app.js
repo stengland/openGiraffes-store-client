@@ -41,9 +41,6 @@ function init() {
     document.querySelector("div#message-box").style.animationPlayState =
       "running";
     document.querySelector(
-      "div#message-box img.icon-2"
-    ).style.animationPlayState = "running";
-    document.querySelector(
       "div#message-box img.icon-1"
     ).style.animationPlayState = "running";
   }

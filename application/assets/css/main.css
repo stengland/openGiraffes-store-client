@@ -558,20 +558,6 @@ div#message-box img.icon-1 {
   top: 40%;
 }
 
-div#message-box img.icon-2 {
-  animation-name: example2;
-  animation-duration: 1s;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
-  position: absolute;
-  animation-play-state: paused;
-  transform: rotate(120deg);
-  width: 90px;
-  z-index: 5;
-  left: 30%;
-  top: 40%;
-}
-
 @keyframes example {
   from {
     left: 30%;
