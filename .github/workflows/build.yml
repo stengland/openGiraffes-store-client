@@ -1,7 +1,7 @@
 name: Build and upload artifact
 on:
   push:
-      branches:
+    branches:
       - main
   workflow_dispatch:
 
