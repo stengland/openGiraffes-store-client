@@ -1,4 +1,4 @@
-![logo](/images/logo.jpeg)
+![logo](images/icon.png)
 
 ## openKaiOS Store
 
