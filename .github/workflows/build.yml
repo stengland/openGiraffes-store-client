@@ -25,4 +25,4 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: App
-          path: build/bhacker-store.zip
+          path: build/openkaios-store-nightly.zip
