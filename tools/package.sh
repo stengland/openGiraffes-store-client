@@ -6,7 +6,7 @@ mkdir -p ./build/tmp
 rm ./build/tmp/application.zip || true
 rm ./build/openkaios-store-nightly.zip || true
 
-echo "{\"version\": 1,\"manifestURL\":\"app://store.openkaios.org/manifest.webapp\"}" > ./build/tmp/metadata.json
+echo "{\"version\": 1,\"manifestURL\":\"app://store.openkaios.top/manifest.webapp\"}" > ./build/tmp/metadata.json
 
 
 cd build/app
