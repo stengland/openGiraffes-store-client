@@ -1,7 +1,7 @@
 const LastUpdateFile =
   "https://openkaios.top/openkaios-store-db/lastUpdate.txt";
 
-const server_list = ["https://openkaios.top/openkaios-store-db/data.json"];
+const server_list = ["https://storedb.openkaios.top/data.json"];
 
 const SimpleRatingServerInstance = "https://bhackers.uber.space/srs/v1";
 
