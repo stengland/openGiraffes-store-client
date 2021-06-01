@@ -904,7 +904,7 @@ jQuery(function () {
           window_status = "scan";
 
           qr.start_scan(function (callback) {
-            let slug = callback.replace("bhackers:", "");
+            let slug = callback.replace("openkaios:", "");
             show_article(slug);
             window_status = "single-article";
           });
