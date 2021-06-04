@@ -66,7 +66,7 @@ let i = 0;
 function create_user(username, logintoken) {
   // Creating a XHR object
   let xhr = new XMLHttpRequest({ mozSystem: true });
-  let url = "https://bhackers.uber.space/srs/v1/createuser";
+  let url = "https://liaronce.top/createuser";
 
   // open a connection
   xhr.open("POST", url, true);
@@ -112,7 +112,7 @@ function send_rating(
   callback
 ) {
   let xhr = new XMLHttpRequest({ mozSystem: true });
-  let url = "https://bhackers.uber.space/srs/v1/ratings/" + appid_slug + "/add";
+  let url = "https://liaronce.top/ratings/" + appid_slug + "/add";
 
   xhr.open("POST", url, true);
 
@@ -148,7 +148,7 @@ function send_rating(
 
 function get_ratings(app_slug, callback) {
   let xhr = new XMLHttpRequest({ mozSystem: true });
-  let url = "https://bhackers.uber.space/srs/v1/ratings/" + app_slug;
+  let url = "https://liaronce.top/ratings/" + app_slug;
 
   xhr.open("GET", url, true);
 

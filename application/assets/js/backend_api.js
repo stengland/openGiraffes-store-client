@@ -3,7 +3,7 @@ const LastUpdateFile =
 
 const server_list = ["https://storedb.openkaios.top/data.json"];
 
-const SimpleRatingServerInstance = "https://bhackers.uber.space/srs/v1";
+const SimpleRatingServerInstance = "https://liaronce.top";
 
 const BackendApi = (() => {
   const TIMEOUT_ERROR = "TimeOutError";
@@ -160,7 +160,7 @@ const BackendApi = (() => {
     update,
     getData,
     setStatusCallback: (cb) => (statusCallback = cb),
-    //count_download,
-    //getDownloadCounts,
+    count_download,
+    getDownloadCounts,
   };
 })();
