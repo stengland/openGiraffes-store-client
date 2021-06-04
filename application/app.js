@@ -97,6 +97,7 @@ function addAppList(callback) {
     let item_icon = data.icon;
     let item_license = data.license;
     let item_type = data.type;
+    let item_locales;
     let donation_icon = "none";
     let item_slug = data.slug;
     let images = "";
@@ -155,6 +156,20 @@ function addAppList(callback) {
       }
     }
 
+    //locales
+    if (data.locales) {
+      item_locales = data.locales.toString();
+
+      var regex = /(<)(.*?)(>)/g;
+      var matches = item_locales.match(regex);
+
+      if (matches != null) {
+        for (var i = 0; i < 20; i++) {
+          item_locales = item_locales.replace(matches[i], "");
+        }
+      }
+    }
+
     //donation
     if (item_donation == "") {
       donation_icon = "no";
@@ -192,6 +207,7 @@ function addAppList(callback) {
       donation: donation_icon,
       tracking: item_tracking,
       type: item_type,
+      locales: item_locales,
       summarie: item_summary,
       icon: item_icon,
       slug: item_slug,
