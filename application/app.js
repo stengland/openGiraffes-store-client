@@ -94,6 +94,7 @@ function addAppList(callback) {
     let item_tags = tag.toString().replace(",", " ");
     let item_author = data.author.toString();
     let item_maintainer;
+    let item_dependencies;
     let item_icon = data.icon;
     let item_license = data.license;
     let item_type = data.type;
@@ -156,6 +157,20 @@ function addAppList(callback) {
       }
     }
 
+    //dependencies
+    if (data.dependencies) {
+      item_dependencies = data.dependencies.toString();
+
+      var regex = /(<)(.*?)(>)/g;
+      var matches = item_dependencies.match(regex);
+
+      if (matches != null) {
+        for (var i = 0; i < 20; i++) {
+          item_dependencies = item_dependencies.replace(matches[i], "");
+        }
+      }
+    }
+
     //locales
     if (data.locales) {
       item_locales = data.locales.toString();
@@ -197,6 +212,7 @@ function addAppList(callback) {
       title: item_title,
       author: item_author,
       maintainer: item_maintainer,
+      dependencies: item_dependencies,
       author_email: item_author_email,
       summary: item_summary,
       category: item_category,
