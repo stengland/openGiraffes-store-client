@@ -10,37 +10,34 @@
         App.Page(params.pageId, {
             data() {
                 return {
-                    aaa: "bbb",
+                    aaa: "ccccccc",
                     mPageOptions: this.createPageOptions(),
                 }
             },
             mounted() {
 
             },
+            destroyed(){
+                console.log("About - destroyed");
+            },
             methods: {
                 createPageOptions() {
                     let context = this;
                     return {
                         toolBar: {
-                            title: "主页",
+                            title: "关于",
                         },
                         navigationBar: {
                             show: true,
                             options: {
                                 right: "返回",
-                                center: "确定",
                                 on: {
                                     keyPress: {
                                         softRight: () => {
                                             console.log("back");
-                                            // this.$destroy();
-                                            // App.closePage(params.pageId);
+                                            App.closePage(params.pageId);
                                             // context.back();
                                         },
-                                        enter: () => {
-                                            console.log("enter");
-                                            App.startPage({ name: "About" });
-                                        }
                                     }
                                 }
                             },

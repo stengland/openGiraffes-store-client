@@ -35,7 +35,6 @@
     height: var(--dimenToolBarHeight);
     background: var(--colorPrimary);
     box-shadow: 0 2px 2px #00000016;
-
 }
 
 .ToolBar .Title {
@@ -46,7 +45,10 @@
 }
 
 .Page {
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: white;
 }
 
 .Page .StatusBar {

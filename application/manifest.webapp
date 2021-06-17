@@ -1,46 +1,49 @@
 {
-  "version": "1.0.0",
-  "name": "openKaiOS Store",
-  "description": "An app to download and install apps",
-  "origin": "app://store.openkaios.top",
-  "launch_path": "/index.html",
-  "type": "certified",
-  "fullscreen": "true",
-
-  "icons": {
-    "56": "/icons/icon-56-56.png",
-    "112": "/icons/icon-112-112.png",
-    "128": "/icons/icon-128-128.png"
-  },
-
-  "developer": {
-    "name": "openKaiOS",
-    "url": "https://openkaios.top"
-  },
-
-  "permissions": {
-    "desktop-notification": {
-      "description": "To show notifications"
-    },
-    "video-capture": {
-      "description": "Reading Codes using the Camera"
+    "version": "1.0.0",
+    "name": "openKaiOS Store",
+    "description": "An app to download and install apps",
+    "origin": "app://store.openkaios.top",
+    "launch_path": "/v2/index.html",
+    "type": "certified",
+    "fullscreen": "false",
+    "chrome": {
+        "statusbar": "overlap"
     },
 
-    "device-storage:sdcard": {
-      "description": "Required for accessing app manifest files",
-      "access": "readwrite"
-    },
-    "device-storage:apps": { "access": "readwrite" },
-    "webapps-manage": {},
-
-    "browser": {},
-
-    "spatialnavigation-app-manage": {
-      "navigator.spatialNavigationEnabled": false
+    "icons": {
+        "56": "/icons/icon-56-56.png",
+        "112": "/icons/icon-112-112.png",
+        "128": "/icons/icon-128-128.png"
     },
 
-    "systemXHR": {
-      "description": "Required to load remote content"
+    "developer": {
+        "name": "openKaiOS",
+        "url": "https://openkaios.top"
+    },
+
+    "permissions": {
+        "desktop-notification": {
+            "description": "To show notifications"
+        },
+        "video-capture": {
+            "description": "Reading Codes using the Camera"
+        },
+
+        "device-storage:sdcard": {
+            "description": "Required for accessing app manifest files",
+            "access": "readwrite"
+        },
+        "device-storage:apps": { "access": "readwrite" },
+        "webapps-manage": {},
+
+        "browser": {},
+
+        "spatialnavigation-app-manage": {
+            "navigator.spatialNavigationEnabled": false
+        },
+
+        "systemXHR": {
+            "description": "Required to load remote content"
+        }
     }
-  }
 }
