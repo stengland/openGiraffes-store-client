@@ -1,0 +1,13 @@
+:root {
+    --dimenStatusBarHeight: 26px;
+    --dimenToolBarHeight: 36px;
+    --dimenNavigationBarHeight: 18px;
+
+    --colorPrimary:#00aeff;
+}
+
+#app {
+    width: 240px;
+    height: 320px;
+    background: white;
+}

@@ -1,0 +1,53 @@
+<page class="page wh-100 flex-v" :options="mPageOptions">
+    <div class="Content flex-1 flex-y">
+        {{aaa}}
+    </div>
+</page>
+
+<script>
+    let params;
+    App.Page(params.pageId, {
+        data() {
+            return {
+                aaa: "bbb",
+                mPageOptions: this.createPageOptions(),
+            }
+        },
+        mounted(){
+            
+        },
+        methods: {
+            createPageOptions() {
+                let context = this;
+                return {
+                    toolBar: {
+                        title: "关于",
+                    },
+                    navigationBar: {
+                        show: true,
+                        options: {
+                            right: "返回",
+                            on: {
+                                keyPress: {
+                                    softRight: () => {
+                                        console.log("back");
+                                        this.$destroy();
+                                        App.closePage(params.pageId);
+                                        // context.back();
+                                    },
+                                }
+                            }
+                        },
+                    }
+                }
+            }
+        }
+    })
+
+</script>
+
+<style>
+    .page .Content {
+        /* background: blueviolet; */
+    }
+</style>
