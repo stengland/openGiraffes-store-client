@@ -1,18 +1,18 @@
-<page class="page" :options="mPageOptions">
-    <div class="Content flex-1 flex-y">
-        {{aaa}}
-    </div>
-</page>
-
-<script>
-    require(["app"], (App) => {
-        let params;
-        App.Page(params.pageId, {
+define(["app"], (App) => {
+    return (params) => {
+        return App.Page({
             data() {
                 return {
                     aaa: "bbb",
                     mPageOptions: this.createPageOptions(),
                 }
+            },
+            render(h) {
+                return h("page", {
+                    props: {
+                        options: this.mPageOptions,
+                    }
+                }, this.aaa);
             },
             mounted() {
 
@@ -39,7 +39,7 @@
                                         },
                                         enter: () => {
                                             console.log("enter");
-                                            App.startPage({ name: "About" });
+                                            App.startPage({ name: "About", params: { id: "000001" } });
                                         }
                                     }
                                 }
@@ -49,11 +49,5 @@
                 }
             }
         })
-    });
-</script>
-
-<style>
-    .page .Content {
-        /* background: blueviolet; */
     }
-</style>
+});

@@ -1,3 +1,3 @@
-define(["js/vue/vue.min"],(Vue)=>{
+define(["js/vue/vue.runtime.min"],(Vue)=>{
     return Vue;
 });
