@@ -3,21 +3,37 @@ define(["app"], (App) => {
         return App.Page({
             data() {
                 return {
-                    aaa: "bbb",
-                    mPageOptions: this.createPageOptions(),
+                    pageOptions: this.createPageOptions(),
                 }
             },
             render(h) {
                 return h("page", {
                     props: {
-                        options: this.mPageOptions,
+                        options: this.pageOptions,
                     }
-                }, params.id);
+                }, [
+                    h("div", { class: "Content flex-1 flex-v center scroll-y", ref: "Content" }, [
+                        h("div", {}, "openKaiOS Store"),
+                        h("div", {}, "基于 bHacker Store 的第三方应用商店。"),
+                        h("div", {}, "Contributors"),
+                        h("div", {}, params.contributors),
+                        h("div", {}, "Respect"),
+                        h("div", {}, "Respect the licenses of the apps, it would be nice if you use app more often to support the developer with a donation. Thanks!"),
+                        h("div", {}, "隐私政策和使用条款"),
+                        h("div", {}, "参见：https://docs.openkaios.top/#/store/terms"),
+                    ]),
+                    h("div", { class: "BuildTime flex-h center" }, [
+                        h("div", {}, "编译时间：" + params.updateTime)
+                    ])
+                ]);
             },
             mounted() {
 
             },
             methods: {
+                onStart() {
+                    this.themeDark();
+                },
                 createPageOptions() {
                     let context = this;
                     return {
@@ -28,16 +44,26 @@ define(["app"], (App) => {
                             show: true,
                             options: {
                                 right: "返回",
-                                center: "确定",
                                 on: {
                                     keyPress: {
                                         softRight: () => {
                                             this.close();
                                         },
-                                        enter: () => {
-                                            console.log("enter");
-                                        }
-                                    }
+                                    },
+                                    keyDown: {
+                                        arrowDown: () => {
+                                            this.$refs.Content.scrollBy({
+                                                behavior: "smooth",
+                                                top: 50,
+                                            });
+                                        },
+                                        arrowUp: () => {
+                                            this.$refs.Content.scrollBy({
+                                                behavior: "smooth",
+                                                top: -50,
+                                            });
+                                        },
+                                    },
                                 }
                             },
                         }

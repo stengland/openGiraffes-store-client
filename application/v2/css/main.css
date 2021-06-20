@@ -1,9 +1,11 @@
 :root {
     --dimenStatusBarHeight: 26px;
     --dimenToolBarHeight: 36px;
-    --dimenNavigationBarHeight: 18px;
+    --dimenNavigationBarHeight: 24px;
 
-    --colorPrimary:#00aeff;
+    --colorPrimary: rgb(0, 162, 255);
+    --colorPrimary10: rgba(0, 162, 255, 0.1);
+    --colorPrimary20: rgba(0, 162, 255, 0.2);
 }
 
 #app {
@@ -11,4 +13,5 @@
     height: 320px;
     background: white;
     position: relative;
+    font-size: 14px;
 }

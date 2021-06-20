@@ -37,6 +37,12 @@
     height: 100%;
 }
 
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 body {
     padding: 0;
     margin: 0;

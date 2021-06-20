@@ -6,7 +6,7 @@ define(() => {
     };
     let R = {
         dimen: {
-            navigationBarHeight: 18,
+            navigationBarHeight: 24,
             statusBarHeight: 26,
             toolBarHeight: 36,
         },

@@ -1,5 +1,6 @@
-///<reference path="jquery.d.ts" />
-///<reference path="vue/types/index.d.ts" />
+///<reference path="types/jquery.d.ts" />
+///<reference path="types/vue/index.d.ts" />
+///<reference path="types/App.d.ts" />
 
 require.config({
     baseUrl: "./",
@@ -13,6 +14,12 @@ require.config({
 });
 
 require(["jquery", "app"], (jquery, App) => {
+    
+    focusable.distanceToCenter = true;
+    focusable.findFocusType = 0;
+    // this.$tv.offsetDistance = 50;
+    focusable.initDis = 0;
+    
     App.startPage({
         name: "Home",
     });

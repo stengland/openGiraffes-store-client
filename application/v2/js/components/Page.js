@@ -25,7 +25,7 @@ define(["vue", "R"], function (Vue, R) {
                     h(
                         "div",
                         {
-                            class: "Content flex-v",
+                            class: "PageContent flex-v",
                             style: this.style_Content,
                         },
                         this.$slots.default
@@ -35,6 +35,7 @@ define(["vue", "R"], function (Vue, R) {
                         {
                             class: "StatusBar w-100",
                             style: this.style_StatusBar,
+                            directives: [{ name: "show", value: this.mOptions.statusBar.show }],
                             show: this.mOptions.statusBar.show,
                         },
                         []
@@ -44,7 +45,7 @@ define(["vue", "R"], function (Vue, R) {
                         {
                             class: "ToolBar w-100",
                             style: this.style_ToolBar,
-                            show: this.mOptions.toolBar.show,
+                            directives: [{ name: "show", value: this.mOptions.toolBar.show }],
                             props: {
                                 title: this.mOptions.toolBar.title,
                             },
@@ -55,8 +56,9 @@ define(["vue", "R"], function (Vue, R) {
                         "navigation-bar",
                         {
                             class: "NavigationBar w-100",
+                            ref:"NavigationBar",
                             style: this.style_NavigationBar,
-                            show: this.mOptions.navigationBar.show,
+                            directives: [{ name: "show", value: this.mOptions.navigationBar.show }],
                             props: {
                                 options: this.mOptions.navigationBar.options,
                             },
@@ -126,6 +128,13 @@ define(["vue", "R"], function (Vue, R) {
                 };
             },
         },
-        methods: {},
+        methods: {
+            onStart(){
+                this.$refs.NavigationBar.onStart();
+            },
+            onStop(){
+                this.$refs.NavigationBar.onStop();
+            }
+        },
     });
 });

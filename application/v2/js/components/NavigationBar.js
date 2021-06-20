@@ -66,6 +66,12 @@ define(["vue"], function (Vue) {
             },
         },
         methods: {
+            onStart() {
+                this.addEventListener();
+            },
+            onStop() {
+                this.removeEventListener();
+            },
             addEventListener() {
                 if (this.mEventAdded) {
                     return;
@@ -92,8 +98,8 @@ define(["vue"], function (Vue) {
                 }
                 return typeof key === "string"
                     ? {
-                          text: key,
-                      }
+                        text: key,
+                    }
                     : key;
             },
             onKeyDown(e) {
