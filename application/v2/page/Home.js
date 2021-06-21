@@ -60,7 +60,7 @@ define(["app"], (App) => {
                                 onFocus: () => {
                                     this.tab = index;
                                     this.focusType = "Tabs";
-                                }
+                                },
                             }
                         }, [
                             h("div", { class: "Name" }, item.name)
@@ -75,6 +75,14 @@ define(["app"], (App) => {
                                     onFocus: () => {
                                         this.item = index;
                                         this.focusType = "Items";
+                                    },
+                                    left: () => {
+                                        let el = this.$refs.Tab[this.tab - 1];
+                                        el && focusable.requestFocus(el);
+                                    },
+                                    right: () => {
+                                        let el = this.$refs.Tab[this.tab + 1];
+                                        el && focusable.requestFocus(el);
                                     },
                                 }
                             }, [
@@ -177,7 +185,7 @@ define(["app"], (App) => {
                             description: item.description || "",
                             tags: item.meta.tags || "",
                             categories: item.meta && item.meta.categories || [],
-                            data:item,
+                            data: item,
                         }
                     });
                     let categories = data.categories;
@@ -229,9 +237,9 @@ define(["app"], (App) => {
                     if (this.keyword) {
                         let keyword = this.keyword.toLowerCase();
                         this.searchResult = this.apps.filter(o => {
-                            return o.name.toLowerCase().includes(keyword) 
-                            || o.description.toLowerCase().includes(keyword)
-                            || o.tags.toLowerCase().includes(keyword);
+                            return o.name.toLowerCase().includes(keyword)
+                                || o.description.toLowerCase().includes(keyword)
+                                || o.tags.toLowerCase().includes(keyword);
                         });
                     } else {
                         this.clearSearch();
