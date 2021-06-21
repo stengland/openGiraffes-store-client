@@ -22,8 +22,8 @@ define(["app"], (App) => {
                         h("div", {}, "隐私政策和使用条款"),
                         h("div", {}, "参见：https://docs.openkaios.top/#/store/terms"),
                     ]),
-                    h("div", { class: "BuildTime flex-h center" }, [
-                        h("div", {}, "编译时间：" + params.updateTime)
+                    h("div", { class: "UpdateTime flex-h center" }, [
+                        h("div", {}, "更新时间：" + params.updateTime)
                     ])
                 ]);
             },

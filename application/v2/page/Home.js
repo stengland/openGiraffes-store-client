@@ -5,6 +5,7 @@ define(["app"], (App) => {
             data() {
                 return {
                     pageOptions: this.createPageOptions(),
+                    apps: [],
                     tabs: [],
                     tab: null,
                     items: [],
@@ -12,6 +13,8 @@ define(["app"], (App) => {
                     focusType: null,
                     updateTime: null,
                     contributors: null,
+                    keyword: null,
+                    searchResult: null,
                 }
             },
             render(h) {
@@ -20,22 +23,34 @@ define(["app"], (App) => {
                         options: this.pageOptions,
                     },
                 }, [
-                    h("div", {
-                        class: "Search flex-h",
+                    h("input", {
+                        class: "Search flex-h", ref: "Search",
+                        domProps: { "placeholder": "搜索", value: this.keyword, },
                         attrs: { focusable: true, },
                         on: {
+                            input: (event) => {
+                                this.keyword = event.target.value;
+                            },
                             onFocus: () => {
                                 this.focusType = "Search";
+                                this.$refs.Search.focus();
                             },
+                            onBlur: () => {
+                                this.$refs.Search.blur();
+                            },
+                            click: () => {
+                                this.onSearch();
+                            }
                         }
                     }, "搜索"),
                     h("div", {
                         class: "Tabs flex-h middle scroll-x", ref: "Tabs",
+                        directives: [{ name: "show", value: !this.searchResult }],
                         attrs: { focusable: true, },
                         on: {
                             onFocus: () => {
                                 this.$refs.Tab && focusable.requestFocus(this.$refs.Tab[this.tab]);
-                            }
+                            },
                         }
                     }, this.tabs.map((item, index) => {
                         return h("div", {
@@ -51,25 +66,26 @@ define(["app"], (App) => {
                             h("div", { class: "Name" }, item.name)
                         ]);
                     })),
-                    h("div", { class: "Items flex-1 flex-v scroll-y", ref: "Items" }, this.items.map((item, index) => {
-                        return h("div", {
-                            class: "Item flex-h middle",
-                            attrs: { selected: index == this.item, focusable: true, },
-                            on: {
-                                onFocus: () => {
-                                    this.item = index;
-                                    this.focusType = "Items";
-                                },
-                            }
-                        }, [
-                            h("img", { class: "Icon", domProps: { src: item.icon } }),
-                            h("div", { class: "Right flex-v flex-1", }, [
-                                h("div", { class: "Title ellipsis", }, item.name),
-                                h("div", { class: "Info ellipsis", }, item.tags),
-                                h("div", { class: "Subtitle ellipsis", }, item.description),
+                    h("div", { class: "Items flex-1 flex-v scroll-y", ref: "Items" },
+                        (this.searchResult ? this.searchResult : this.items).map((item, index) => {
+                            return h("div", {
+                                class: "Item flex-h middle",
+                                attrs: { selected: index == this.item, focusable: true, },
+                                on: {
+                                    onFocus: () => {
+                                        this.item = index;
+                                        this.focusType = "Items";
+                                    },
+                                }
+                            }, [
+                                h("img", { class: "Icon", domProps: { src: item.icon } }),
+                                h("div", { class: "Right flex-v flex-1", }, [
+                                    h("div", { class: "Title ellipsis", }, item.name),
+                                    h("div", { class: "Info ellipsis", }, item.tags),
+                                    h("div", { class: "Subtitle ellipsis", }, item.description),
+                                ])
                             ])
-                        ])
-                    }))
+                        }))
                 ]);
             },
             mounted() {
@@ -107,6 +123,11 @@ define(["app"], (App) => {
                         navigationBar: {
                             show: true,
                             options: {
+                                get left() {
+                                    if (context.searchResult) {
+                                        return "清空搜索";
+                                    }
+                                },
                                 right: "关于",
                                 get center() {
                                     switch (context.focusType) {
@@ -127,7 +148,10 @@ define(["app"], (App) => {
                                                 },
                                             });
                                         },
-                                        enter: () => {
+                                        softLeft: () => {
+                                            if (this.searchResult) {
+                                                this.clearSearch();
+                                            }
                                         }
                                     }
                                 }
@@ -139,6 +163,7 @@ define(["app"], (App) => {
                     let contributors = [];
 
                     let data = BackendApi.getData();
+                    console.log(data);
                     let apps = data.apps;
                     apps = apps.map((item) => {
                         let item_author = item.author.toString();
@@ -148,10 +173,11 @@ define(["app"], (App) => {
                         }
                         return {
                             icon: item.icon,
-                            name: item.name,
-                            description: item.description,
+                            name: item.name || "",
+                            description: item.description || "",
                             tags: item.meta.tags || "",
                             categories: item.meta && item.meta.categories || [],
+                            data:item,
                         }
                     });
                     let categories = data.categories;
@@ -196,6 +222,24 @@ define(["app"], (App) => {
                     this.updateTime = new Date(data.generated_at).format("yyyy-MM-dd HH:mm");
                     //unique author list
                     this.contributors = contributors.sort().join(", ");
+
+                    this.apps = apps;
+                },
+                onSearch() {
+                    if (this.keyword) {
+                        let keyword = this.keyword.toLowerCase();
+                        this.searchResult = this.apps.filter(o => {
+                            return o.name.toLowerCase().includes(keyword) 
+                            || o.description.toLowerCase().includes(keyword)
+                            || o.tags.toLowerCase().includes(keyword);
+                        });
+                    } else {
+                        this.clearSearch();
+                    }
+                },
+                clearSearch() {
+                    this.searchResult = null;
+                    this.keyword = null;
                 }
             }
         })

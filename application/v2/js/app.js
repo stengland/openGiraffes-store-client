@@ -1,7 +1,7 @@
 define(["vue", "js/components/index"], (Vue) => {
-    let PageId = 1;
+    let PageId = 0;
     const createPageId = () => {
-        return PageId++;
+        return ++PageId;
     };
     let Pages = [];
     let css = [];
@@ -28,6 +28,7 @@ define(["vue", "js/components/index"], (Vue) => {
         require([`page/${name}`], (page) => {
             let vue = page(location.params || {});
             vue.$el.classList.add(name);
+            vue.$el.style.zIndex = PageId * 1000
         });
     };
     App.Page = (options) => {
@@ -70,11 +71,11 @@ define(["vue", "js/components/index"], (Vue) => {
                     if (this.$el) {
                         focusable.limitingEl = this.$el;
                     }
-                    if (!restart) {
-                        this.$nextTick(() => {
-                            this.requestFocus();
-                        });
-                    }
+                    // if (!restart) {
+                    //     this.$nextTick(() => {
+                    //         this.requestFocus();
+                    //     });
+                    // }
                 },
                 _onStop() {
                     LifeCycle(this, "onStop");
