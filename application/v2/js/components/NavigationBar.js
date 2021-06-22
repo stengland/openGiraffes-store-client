@@ -135,6 +135,9 @@ define(["vue"], function (Vue) {
                 }
             },
             on(eventType, e) {
+                if (this.options.disable) {
+                    return;
+                }
                 let event = this.options.on && this.options.on[eventType];
                 if (!event) {
                     return;

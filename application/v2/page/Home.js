@@ -84,9 +84,17 @@ define(["app"], (App) => {
                                         let el = this.$refs.Tab[this.tab + 1];
                                         el && focusable.requestFocus(el);
                                     },
+                                    click: () => {
+                                        App.startPage({
+                                            name: "AppDetails",
+                                            params: {
+                                                data: item.data,
+                                            },
+                                        });
+                                    }
                                 }
                             }, [
-                                h("img", { class: "Icon", domProps: { src: item.icon } }),
+                                h("img", { class: "Icon", domProps: { src: item.icon,key:`Icon-${this.tab}-${index}` } }),
                                 h("div", { class: "Right flex-v flex-1", }, [
                                     h("div", { class: "Title ellipsis", }, item.name),
                                     h("div", { class: "Info ellipsis", }, item.tags),
@@ -168,10 +176,20 @@ define(["app"], (App) => {
                     }
                 },
                 loadData() {
+                    BackendApi.update()
+                        .then(() => {
+                            this.loadData_Set();
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            alert("数据获取失败");
+                        });
+                },
+                loadData_Set() {
                     let contributors = [];
 
                     let data = BackendApi.getData();
-                    console.log(data);
+                    // console.log(data);
                     let apps = data.apps;
                     apps = apps.map((item) => {
                         let item_author = item.author.toString();
