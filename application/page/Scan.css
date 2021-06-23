@@ -1,11 +1,11 @@
-.Scan.Page .NavigationBar{
-    color: white;
+.Scan.Page .NavigationBar {
+  color: white;
 }
-.Scan.Page .Content{
-    background: black;
+.Scan.Page .Content {
+  background: black;
 }
-.Scan.Page .Content > .Video{
-    object-fit: cover;
+.Scan.Page .Content > .Video {
+  object-fit: cover;
 }
 
 .Scan.Page .Content > .corner-nw,
