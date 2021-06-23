@@ -62,12 +62,12 @@ define(["app"], (App) => {
                   h(
                     "div",
                     { class: `Item ${this.data.has_ads && "Warning"}` },
-                    this.data.has_ads ? "有广告" : "无广告"
+                    this.data.has_ads ? this.$t("Ad_has") : this.$t("Ad_no")
                   ),
                   h(
                     "div",
                     { class: `Item ${this.data.has_tracking && "Warning"}` },
-                    this.data.has_tracking ? "有追踪" : "无追踪"
+                    this.data.has_tracking ? this.$t("Tracking_has") : this.$t("Tracking_no")
                   ),
                 ]),
                 h("div", { class: "Tabs w-100 flex-h middle " }, [
@@ -108,18 +108,18 @@ define(["app"], (App) => {
                     h(
                       "div",
                       { class: "Version" },
-                      ["版本", this.data.download.version].join("：")
+                      [this.$t("App_version"), this.data.download.version].join("：")
                     ),
                     h(
                       "div",
                       { class: "Type" },
-                      ["类型", this.data.type].join("：")
+                      [this.$t("App_type"), this.data.type].join("：")
                     ),
                   ]),
                   h(
                     "div",
                     { class: "Author" },
-                    ["作者", this.data.author.join("，")].join("：")
+                    [this.$t("App_author"), this.data.author.join("，")].join("：")
                   ),
                 ]),
               ]
@@ -142,7 +142,7 @@ define(["app"], (App) => {
             },
             toolBar: {
               show: false,
-              title: "应用详情",
+              title: this.$t("App_description"),
             },
             navigationBar: {
               show: true,
@@ -152,11 +152,11 @@ define(["app"], (App) => {
                 },
                 get left() {
                   if (context.installing) {
-                    return "安装中";
+                    return this.$t("App_installing");
                   }
-                  return context.after_installation ? "打开" : "安装";
+                  return context.after_installation ? this.$t("App_open") : this.$t("App_install");
                 },
-                right: "返回",
+                right: this.$t("back"),
                 on: {
                   keyPress: {
                     softLeft: () => {
@@ -189,13 +189,13 @@ define(["app"], (App) => {
               let file = new Blob([blob], { type: "application/zip" });
               this.installPkg(file);
             } else {
-              alert("can't download app");
+              alert(this.$t("App_download_failed"));
             }
           };
 
           xhttp.onerror = () => {
             this.installing = false;
-            alert("can't download app");
+            alert(this.$t("App_download_failed"));
             // toaster(" status: " + xhttp.status + xhttp.getAllResponseHeaders(), 3000);
           };
 
@@ -203,26 +203,26 @@ define(["app"], (App) => {
         },
         installPkg(packageFile) {
           if (!navigator.mozApps.mgmt.import()) {
-            alert("This KaiOS version do not support import()");
+            alert(this.$t("App_mgmt_support_error"));
             return false;
           }
           navigator.mozApps.mgmt
             .import(packageFile)
             .then((e) => {
               this.after_installation = true;
-              alert("App installed successfully.");
+              alert(this.$t("App_mgmt_install_success"));
             })
             .catch((error) => {
               if (error.name === "noMetadata") {
-                alert("Installation error: noMetadata");
+                alert(this.$t("App_mgmt_install_error_nometa"));
               }
               if (error.name === "AppAlreadyInstalled") {
-                alert("Installation error: App Already Installed.");
+                alert(this.$t("App_mgmt_install_error_already_installed"));
               }
 
               if (error.name === "InvalidPrivilegeLevel") {
                 alert(
-                  "Installation error: You probably need to do the priviliged factory reset first."
+                  this.$t("App_mgmt_install_error_no_priviliged")
                 );
                 // TODO open an guide that explains it, with links to a backup guide.
               }

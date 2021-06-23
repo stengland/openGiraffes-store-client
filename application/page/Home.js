@@ -31,7 +31,7 @@ define(["app"], (App) => {
                 {
                   class: "Search flex-h flex-1",
                   ref: "Search",
-                  domProps: { placeholder: "搜索", value: this.keyword },
+                  domProps: { placeholder: this.$t("search"), value: this.keyword },
                   attrs: { focusable: true },
                   on: {
                     input: (event) => {
@@ -49,7 +49,7 @@ define(["app"], (App) => {
                     },
                   },
                 },
-                "搜索"
+                this.$t("search")
               ),
               h("img", {
                 class: "Scan",
@@ -62,13 +62,13 @@ define(["app"], (App) => {
                       params: {
                         callback: (str) => {
                           if (!str.startsWith("openkaios:")) {
-                            alert("无效的二维码");
+                            alert(this.$t("QR_invalid"));
                             return;
                           }
                           let slug = str.replace("openkaios:", "");
                           let find = this.apps.find((o) => o.slug == slug);
                           if (!find) {
-                            alert("未找到该应用");
+                            alert(this.$t("未找到该应用"));
                             return;
                           }
                           App.startPage({
@@ -205,23 +205,23 @@ define(["app"], (App) => {
             },
             toolBar: {
               show: false,
-              title: "主页",
+              title: this.$t("home"),
             },
             navigationBar: {
               show: true,
               options: {
                 get left() {
                   if (context.searchResult) {
-                    return "清空搜索";
+                    return this.$t("search_clean");
                   }
                 },
-                right: "关于",
+                right: this.$t("about"),
                 get center() {
                   switch (context.focusType) {
                     case "Search":
-                      return "搜索";
+                      return this.$t("search");
                     case "Items":
-                      return "选择";
+                      return this.$t("select");
                   }
                 },
                 on: {
@@ -253,7 +253,7 @@ define(["app"], (App) => {
             })
             .catch((error) => {
               console.log(error);
-              alert("数据获取失败");
+              alert(this.$t("Data_geterror"));
             });
         },
         loadData_Set() {
@@ -295,7 +295,7 @@ define(["app"], (App) => {
             };
           });
           let unkown = {
-            name: "无分类",
+            name: this.$t("Category_none"),
             id: "unkown",
             apps: [],
           };

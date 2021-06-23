@@ -51,12 +51,12 @@ define(["app"], (App) => {
           let context = this;
           return {
             toolBar: {
-              title: "关于",
+              title: this.$t("about"),
             },
             navigationBar: {
               show: true,
               options: {
-                right: "返回",
+                right: this.$t("back"),
                 on: {
                   keyPress: {
                     softRight: () => {

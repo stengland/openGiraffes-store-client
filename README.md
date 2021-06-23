@@ -4,6 +4,11 @@
 
 An alternative app store by free developers for free devices.
 
+## TODO List
+
+ - [ ] Upgrade app
+ - [ ] Upgrade self
+
 ## Contributing
 
 ### Setup
@@ -35,4 +40,7 @@ npm run formatting:test
 npm run formatting:fix
 ```
 
+### ADB
+```sh
 adb forward tcp:6000 localfilesystem:/data/local/debugger-socket
+```

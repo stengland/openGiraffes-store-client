@@ -9,6 +9,7 @@ require.config({
     text: "js/libs/text.min",
     R: "js/R",
     vue: "js/vue/index",
+    i18n: "js/vue/vue-i18n.min",
     app: "js/app",
   },
 });

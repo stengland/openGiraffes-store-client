@@ -45,5 +45,12 @@
     "systemXHR": {
       "description": "Required to load remote content"
     }
-  }
+  },
+  "locales": {
+    "zh-CN": {
+        "name": "openKaiOS Store",
+        "description": "openKaiOS 应用商店"
+    }
+  },
+  "default_locale": "zh-CN"
 }

@@ -25,5 +25,6 @@ define(["js/vue/vue.runtime.min"], (Vue) => {
         });
     },
   });
+  // Vue.prototype.translate = navigator.mozL10n.get;
   return Vue;
 });

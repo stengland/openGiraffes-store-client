@@ -45,7 +45,7 @@ define(["app"], (App) => {
             },
             toolBar: {
               show: false,
-              title: "二维码扫描",
+              title: this.$t("QR_title"),
               backgroundColor,
             },
             navigationBar: {
@@ -53,7 +53,7 @@ define(["app"], (App) => {
               padding: false,
               backgroundColor,
               options: {
-                right: "返回",
+                right: this.$t("back"),
                 on: {
                   keyPress: {
                     softRight: () => {
