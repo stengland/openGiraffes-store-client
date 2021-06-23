@@ -3,7 +3,9 @@
 **/applait.finder.min.js
 **/jquery.autocomplete.min.js
 **/moments.min.js
-**/moments.min.js
+**/require.min.js
+**/text.min.js
+**/vue.runtime.min.js
 
 build
 node_modules
