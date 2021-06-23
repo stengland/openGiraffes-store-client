@@ -1,9 +1,4 @@
-define(["vue", "js/components/index", "i18n"], (Vue, VueI18n) => {
-  Vue.use(VueI18n);
-  const i18n = new VueI18n({
-    locale: navigator.language,
-    messages: this.messages,
-  });
+define(["vue","js/components/index", ], (Vue) => {
   let PageId = 0;
   const createPageId = () => {
     return ++PageId;
@@ -40,7 +35,6 @@ define(["vue", "js/components/index", "i18n"], (Vue, VueI18n) => {
   };
   App.Page = (options) => {
     let extend = Vue.extend({
-      i18n,
       mounted() {
         this._onStart();
       },

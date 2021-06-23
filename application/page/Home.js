@@ -212,16 +212,16 @@ define(["app"], (App) => {
               options: {
                 get left() {
                   if (context.searchResult) {
-                    return this.$t("search_clean");
+                    return context.$t("search_clean");
                   }
                 },
-                right: this.$t("about"),
+                right: context.$t("about"),
                 get center() {
                   switch (context.focusType) {
                     case "Search":
-                      return this.$t("search");
+                      return context.$t("search");
                     case "Items":
-                      return this.$t("select");
+                      return context.$t("select");
                   }
                 },
                 on: {

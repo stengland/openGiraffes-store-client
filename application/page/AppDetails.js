@@ -152,9 +152,9 @@ define(["app"], (App) => {
                 },
                 get left() {
                   if (context.installing) {
-                    return this.$t("App_installing");
+                    return context.$t("App_installing");
                   }
-                  return context.after_installation ? this.$t("App_open") : this.$t("App_install");
+                  return context.after_installation ? context.$t("App_open") : context.$t("App_install");
                 },
                 right: this.$t("back"),
                 on: {
