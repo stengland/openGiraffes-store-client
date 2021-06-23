@@ -3,7 +3,7 @@
     "name": "openKaiOS Store",
     "description": "An app to download and install apps",
     "origin": "app://store.openkaios.top",
-    "launch_path": "/v2/index.html",
+    "launch_path": "/index.html",
     "type": "certified",
     "fullscreen": "false",
     "chrome": {

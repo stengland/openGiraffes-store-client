@@ -5,7 +5,7 @@
 require.config({
     baseUrl: "./",
     paths: {
-        jquery: "../assets/js/jQuery-3.1.0",
+        jquery: "js/jquery.min",
         text: "js/text",
         R: "js/R",
         vue: "js/vue/index",
