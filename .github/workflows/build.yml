@@ -29,14 +29,3 @@ jobs:
         with:
           name: bilibili_kaios-omnisd-nightly
           path: ./workdir/*
-
-      - name: Upload nightly release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.ACTION_TOKEN }}
-          file: ./bilibili_kaios-omnisd-nightly.zip
-          tag: nightly
-          body: "Nightly build"
-          file_glob: true
-          prerelease: true
-          overwrite: true
