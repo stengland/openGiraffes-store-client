@@ -23,26 +23,59 @@ define(["app"], (App) => {
                         options: this.pageOptions,
                     },
                 }, [
-                    h("input", {
-                        class: "Search flex-h", ref: "Search",
-                        domProps: { "placeholder": "搜索", value: this.keyword, },
-                        attrs: { focusable: true, },
-                        on: {
-                            input: (event) => {
-                                this.keyword = event.target.value;
-                            },
-                            onFocus: () => {
-                                this.focusType = "Search";
-                                this.$refs.Search.focus();
-                            },
-                            onBlur: () => {
-                                this.$refs.Search.blur();
-                            },
-                            click: () => {
-                                this.onSearch();
+                    h("div", { class: "SearchLayout flex-h middle" }, [
+                        h("input", {
+                            class: "Search flex-h flex-1", ref: "Search",
+                            domProps: { "placeholder": "搜索", value: this.keyword, },
+                            attrs: { focusable: true, },
+                            on: {
+                                input: (event) => {
+                                    this.keyword = event.target.value;
+                                },
+                                onFocus: () => {
+                                    this.focusType = "Search";
+                                    this.$refs.Search.focus();
+                                },
+                                onBlur: () => {
+                                    this.$refs.Search.blur();
+                                },
+                                click: () => {
+                                    this.onSearch();
+                                }
                             }
-                        }
-                    }, "搜索"),
+                        }, "搜索"),
+                        h("img", {
+                            class: "Scan", domProps: { src: "img/icon_scan.png", },
+                            attrs: { focusable: true, },
+                            on: {
+                                click: () => {
+                                    App.startPage({
+                                        name: "Scan",
+                                        params: {
+                                            callback: (str) => {
+                                                if (!str.startsWith("openkaios:")) {
+                                                    alert("无效的二维码");
+                                                    return;
+                                                }
+                                                let slug = str.replace("openkaios:", "");
+                                                let find = this.apps.find(o => o.slug == slug);
+                                                if (!find) {
+                                                    alert("未找到该应用");
+                                                    return;
+                                                }
+                                                App.startPage({
+                                                    name: "AppDetails",
+                                                    params: {
+                                                        data: find.data,
+                                                    },
+                                                });
+                                            },
+                                        },
+                                    });
+                                },
+                            },
+                        }),
+                    ]),
                     h("div", {
                         class: "Tabs flex-h middle scroll-x", ref: "Tabs",
                         directives: [{ name: "show", value: !this.searchResult }],
@@ -94,7 +127,7 @@ define(["app"], (App) => {
                                     }
                                 }
                             }, [
-                                h("img", { class: "Icon", domProps: { src: item.icon,key:`Icon-${this.tab}-${index}` } }),
+                                h("img", { class: "Icon", domProps: { src: item.icon, key: `Icon-${this.tab}-${index}` } }),
                                 h("div", { class: "Right flex-v flex-1", }, [
                                     h("div", { class: "Title ellipsis", }, item.name),
                                     h("div", { class: "Info ellipsis", }, item.tags),
@@ -203,6 +236,7 @@ define(["app"], (App) => {
                             description: item.description || "",
                             tags: item.meta.tags || "",
                             categories: item.meta && item.meta.categories || [],
+                            slug: item.slug,
                             data: item,
                         }
                     });

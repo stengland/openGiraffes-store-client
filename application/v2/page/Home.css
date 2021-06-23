@@ -1,5 +1,8 @@
+.Home.Page .SearchLayout{
+    margin-top: 3px;
+}
 .Home.Page .Search {
-    margin: 3px 10px 0 10px;
+    margin: 0px 10px 0 10px;
     background: rgba(0, 0, 0, 0.1);
     color: rgba(0, 0, 0, 1);
     padding: 4px 16px;
@@ -12,6 +15,17 @@
 }
 .Home.Page .Search.focus {
     border-color: var(--colorPrimary);
+}
+.Home.Page  .SearchLayout .Scan{
+    position: relative;
+    width: 26px;
+    height: 26px;
+    margin-right: 10px;
+    padding: 1px;
+}
+.Home.Page  .SearchLayout .Scan.focus{
+    border-radius: 30px;
+    background: var(--colorPrimary20);
 }
 .Home.Page .Tabs {
     margin-top: 5px;

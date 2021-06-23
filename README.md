@@ -34,3 +34,5 @@ npm run formatting:test
 # run the formatter
 npm run formatting:fix
 ```
+
+adb forward tcp:6000 localfilesystem:/data/local/debugger-socket
