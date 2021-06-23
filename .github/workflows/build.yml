@@ -7,26 +7,36 @@ on:
 
 jobs:
   build:
-    name: Build
-
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Set Node.js 12.x
-        uses: actions/setup-node@v1
+      - name: Package application.zip
+        run: |
+          ls application
+          cd application
+          zip -r application.zip ./*
+          mv application.zip ../application.zip
+          cd ..
+          zip -r openkaios-store-nightly.zip application.zip metadata.json
+          mkdir workdir
+          mv application.zip workdir/application.zip
+          mv metadata.json workdir/metadata.json
+
+      - name: Build artifact
+        uses: actions/upload-artifact@v2
         with:
-          node-version: 12.x
+          name: bilibili_kaios-omnisd-nightly
+          path: ./workdir/*
 
-      - name: npm install
-        run: npm install
-
-      - name: build
-        run: npm run package
-
-      - uses: actions/upload-artifact@v2
+      - name: Upload nightly release
+        uses: svenstaro/upload-release-action@v2
         with:
-          name: App
-          path: build/openkaios-store-nightly.zip
+          repo_token: ${{ secrets.ACTION_TOKEN }}
+          file: ./bilibili_kaios-omnisd-nightly.zip
+          tag: nightly
+          body: "Nightly build"
+          file_glob: true
+          prerelease: true
+          overwrite: true
