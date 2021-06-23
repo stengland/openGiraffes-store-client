@@ -7,7 +7,7 @@
     "formatting:test": "npx prettier --check .",
     "formatting:fix": "npx prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "package": "./tools/build.sh && ./tools/package.sh"
+    "package": "./build.sh"
   },
   "repository": {
     "type": "git",
