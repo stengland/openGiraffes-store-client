@@ -68,7 +68,7 @@ define(["app"], (App) => {
                           let slug = str.replace("openkaios:", "");
                           let find = this.apps.find((o) => o.slug == slug);
                           if (!find) {
-                            alert(this.$t("未找到该应用"));
+                            alert(this.$t("App_notfound"));
                             return;
                           }
                           App.startPage({
@@ -281,12 +281,15 @@ define(["app"], (App) => {
           let categories = data.categories;
           categories = Object.keys(categories).map((key) => {
             let item = categories[key];
-            let name =
+            let name = item.name;
+            let locales_name =
               item.locales &&
               item.locales.length &&
               item.locales.find((o) => o["zh-CN"]);
-            if (name) {
-              name = name["zh-CN"];
+            if (locales_name || navigator.language !== "en-US") {
+              name = locales_name[navigator.language]
+            } else {
+              name = item.name
             }
             return {
               name: name || item.name,
