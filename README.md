@@ -6,8 +6,8 @@ An alternative app store by free developers for free devices.
 
 ## TODO List
 
- - [ ] Upgrade app
- - [ ] Upgrade self
+- [ ] Upgrade app
+- [ ] Upgrade self
 
 ## Contributing
 
@@ -41,6 +41,7 @@ npm run formatting:fix
 ```
 
 ### ADB
+
 ```sh
 adb forward tcp:6000 localfilesystem:/data/local/debugger-socket
 ```

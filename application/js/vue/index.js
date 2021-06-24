@@ -1,4 +1,8 @@
-define(["js/vue/vue.runtime.min","js/vue/vue-i18n.min","js/locales"], (Vue,VueI18n,Locales) => {
+define(["js/vue/vue.runtime.min", "js/vue/vue-i18n.min", "js/locales"], (
+  Vue,
+  VueI18n,
+  Locales
+) => {
   const keep = (el) => {
     let attr = el.getAttribute("data-vue-keep-scroll");
     if (!attr) {
@@ -25,7 +29,6 @@ define(["js/vue/vue.runtime.min","js/vue/vue-i18n.min","js/locales"], (Vue,VueI1
         });
     },
   });
-  // Vue.prototype.translate = navigator.mozL10n.get;
   Vue.use(VueI18n);
   const i18n = new VueI18n({
     locale: navigator.language,

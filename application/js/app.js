@@ -1,4 +1,4 @@
-define(["vue","js/components/index", ], (Vue) => {
+define(["vue", "js/components/index"], (Vue) => {
   let PageId = 0;
   const createPageId = () => {
     return ++PageId;

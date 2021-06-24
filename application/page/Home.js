@@ -31,7 +31,10 @@ define(["app"], (App) => {
                 {
                   class: "Search flex-h flex-1",
                   ref: "Search",
-                  domProps: { placeholder: this.$t("search"), value: this.keyword },
+                  domProps: {
+                    placeholder: this.$t("search"),
+                    value: this.keyword,
+                  },
                   attrs: { focusable: true },
                   on: {
                     input: (event) => {
@@ -287,9 +290,9 @@ define(["app"], (App) => {
               item.locales.length &&
               item.locales.find((o) => o["zh-CN"]);
             if (locales_name || navigator.language !== "en-US") {
-              name = locales_name[navigator.language]
+              name = locales_name[navigator.language];
             } else {
-              name = item.name
+              name = item.name;
             }
             return {
               name: name || item.name,

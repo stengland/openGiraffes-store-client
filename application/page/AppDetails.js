@@ -67,7 +67,9 @@ define(["app"], (App) => {
                   h(
                     "div",
                     { class: `Item ${this.data.has_tracking && "Warning"}` },
-                    this.data.has_tracking ? this.$t("Tracking_has") : this.$t("Tracking_no")
+                    this.data.has_tracking
+                      ? this.$t("Tracking_has")
+                      : this.$t("Tracking_no")
                   ),
                 ]),
                 h("div", { class: "Tabs w-100 flex-h middle " }, [
@@ -108,7 +110,9 @@ define(["app"], (App) => {
                     h(
                       "div",
                       { class: "Version" },
-                      [this.$t("App_version"), this.data.download.version].join("：")
+                      [this.$t("App_version"), this.data.download.version].join(
+                        "："
+                      )
                     ),
                     h(
                       "div",
@@ -119,7 +123,9 @@ define(["app"], (App) => {
                   h(
                     "div",
                     { class: "Author" },
-                    [this.$t("App_author"), this.data.author.join("，")].join("：")
+                    [this.$t("App_author"), this.data.author.join("，")].join(
+                      "："
+                    )
                   ),
                 ]),
               ]
@@ -154,7 +160,9 @@ define(["app"], (App) => {
                   if (context.installing) {
                     return context.$t("App_installing");
                   }
-                  return context.after_installation ? context.$t("App_open") : context.$t("App_install");
+                  return context.after_installation
+                    ? context.$t("App_open")
+                    : context.$t("App_install");
                 },
                 right: this.$t("back"),
                 on: {
@@ -221,9 +229,7 @@ define(["app"], (App) => {
               }
 
               if (error.name === "InvalidPrivilegeLevel") {
-                alert(
-                  this.$t("App_mgmt_install_error_no_priviliged")
-                );
+                alert(this.$t("App_mgmt_install_error_no_priviliged"));
                 // TODO open an guide that explains it, with links to a backup guide.
               }
             });
