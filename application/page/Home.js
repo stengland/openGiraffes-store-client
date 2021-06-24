@@ -64,11 +64,11 @@ define(["app"], (App) => {
                       name: "Scan",
                       params: {
                         callback: (str) => {
-                          if (!str.startsWith("openkaios:")) {
+                          if (!str.startsWith("openkaios:")) {  // If you use bHacker Store, please change "openkaios:" to "bhackers:"
                             alert(this.$t("QR_invalid"));
                             return;
                           }
-                          let slug = str.replace("openkaios:", "");
+                          let slug = str.replace("openkaios:", "");  // If you use bHacker Store, please change "openkaios:" to "bhackers:"
                           let find = this.apps.find((o) => o.slug == slug);
                           if (!find) {
                             alert(this.$t("App_notfound"));
@@ -285,6 +285,7 @@ define(["app"], (App) => {
           categories = Object.keys(categories).map((key) => {
             let item = categories[key];
             let name = item.name;
+            // If you use bHacker Store, please comment these codes
             let locales_name =
               item.locales &&
               item.locales.length &&
@@ -294,6 +295,7 @@ define(["app"], (App) => {
             } else {
               name = item.name;
             }
+            // End
             return {
               name: name || item.name,
               id: key,

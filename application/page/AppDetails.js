@@ -79,7 +79,7 @@ define(["app"], (App) => {
                       class: "Item flex-h middle center",
                       attrs: { selected: true, focusable: true },
                     },
-                    "详情"
+                    this.$t("description")
                   ),
                 ]),
                 h("div", { class: "Details Part w-100" }, [
