@@ -64,11 +64,12 @@ define(["app"], (App) => {
                       name: "Scan",
                       params: {
                         callback: (str) => {
-                          if (!str.startsWith("openkaios:")) {  // If you use bHacker Store, please change "openkaios:" to "bhackers:"
+                          if (!str.startsWith("openkaios:")) {
+                            // If you use bHacker Store, please change "openkaios:" to "bhackers:"
                             alert(this.$t("QR_invalid"));
                             return;
                           }
-                          let slug = str.replace("openkaios:", "");  // If you use bHacker Store, please change "openkaios:" to "bhackers:"
+                          let slug = str.replace("openkaios:", ""); // If you use bHacker Store, please change "openkaios:" to "bhackers:"
                           let find = this.apps.find((o) => o.slug == slug);
                           if (!find) {
                             alert(this.$t("App_notfound"));
