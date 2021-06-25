@@ -33,7 +33,7 @@ define(["app"], (App) => {
                   "Respect the licenses of the apps, it would be nice if you use app more often to support the developer with a donation. Thanks!"
                 ),
                 h("div", {}, "隐私政策和使用条款"),
-                h("div", {}, "参见：https://docs.openkaios.top/#/store/terms"),
+                h("div", {}, "参见：" + server_info.terms),
               ]
             ),
             h("div", { class: "UpdateTime flex-h center" }, [

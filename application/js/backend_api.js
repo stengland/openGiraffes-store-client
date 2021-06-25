@@ -1,19 +1,8 @@
-const LastUpdateFile =
-  "https://openkaios.top/openkaios-store-db/lastUpdate.txt";
+const LastUpdateFile = server_info.LastUpdateFile;
 
-const server_list = ["https://storedb.openkaios.top/data.json"];
+const server_list = server_info.server_list;
 
-const SimpleRatingServerInstance = "https://liaronce.top";
-
-// const LastUpdateFile =
-//   "https://banana-hackers.gitlab.io/store-db/lastUpdate.txt";
-
-// const server_list = [
-//   "https://banana-hackers.gitlab.io/store-db/data.json",
-//   "https://bananahackers.github.io/store-db/data.json",
-// ];
-
-// const SimpleRatingServerInstance = "https://bhackers.uber.space/srs/v1";
+const SimpleRatingServerInstance = server_info.SimpleRatingServer;
 
 const BackendApi = (() => {
   const TIMEOUT_ERROR = "TimeOutError";
