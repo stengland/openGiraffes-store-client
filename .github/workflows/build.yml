@@ -21,7 +21,7 @@ jobs:
           cd ..
           mkdir workdir
           mv application.zip workdir/application.zip
-          mv metadata.json workdir/metadata.json
+          cp metadata.json workdir/metadata.json
 
       - name: Build artifact (openKaiOS Database)
         uses: actions/upload-artifact@v2
@@ -39,7 +39,7 @@ jobs:
           cd ..
           mkdir workdir2
           mv application.zip workdir2/application.zip
-          mv metadata.json workdir2/metadata.json
+          cp metadata.json workdir2/metadata.json
 
       - name: Build artifact (bHackers Database)
         uses: actions/upload-artifact@v2
