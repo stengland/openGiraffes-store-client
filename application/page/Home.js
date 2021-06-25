@@ -92,7 +92,7 @@ define(["app"], (App) => {
               {
                 class: "Tabs flex-h middle scroll-x",
                 ref: "Tabs",
-                directives: [{ name: "show", value: !this.searchResult }],
+                directives: [{ name: "show", value: !this.searchResult }, { name: "keep-scroll", value: true },],
                 attrs: { focusable: true },
                 on: {
                   onFocus: () => {
@@ -122,7 +122,10 @@ define(["app"], (App) => {
             ),
             h(
               "div",
-              { class: "Items flex-1 flex-v scroll-y", ref: "Items" },
+              {
+                class: "Items flex-1 flex-v scroll-y", ref: "Items",
+                directives: [{ name: "keep-scroll", value: true },],
+              },
               (this.searchResult ? this.searchResult : this.items).map(
                 (item, index) => {
                   return h(
@@ -184,16 +187,6 @@ define(["app"], (App) => {
       watch: {
         tab(value) {
           this.items = this.tabs[value].apps;
-        },
-        focusType(value) {
-          switch (value) {
-            case "Tabs":
-              focusable.scrollEl = this.$refs.Tabs;
-              break;
-            case "Items":
-              focusable.scrollEl = this.$refs.Items;
-              break;
-          }
         },
       },
       methods: {

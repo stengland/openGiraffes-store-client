@@ -30,7 +30,7 @@
 }
 .Home.Page .Tabs {
   margin-top: 5px;
-  padding: 0 10px;
+  padding: 1px 10px;
   overflow: -moz-scrollbars-none;
 }
 .Home.Page .Tabs > .Item {

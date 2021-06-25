@@ -49,7 +49,6 @@ define(["vue", "js/components/index"], (Vue) => {
           let pageId = this.getPageId();
           this._onStop();
           this.$destroy();
-          $("#" + pageId).remove();
           Pages.splice(
             Pages.findIndex((o) => o.id == pageId),
             1
@@ -68,11 +67,14 @@ define(["vue", "js/components/index"], (Vue) => {
           }
         },
         _onStart(restart = false) {
-          this.onStart();
+          this.$el && $("#app").append(this.$el);
+          this.$emit("onStart", restart);
           LifeCycle(this, "onStart");
           if (this.$el) {
             focusable.limitingEl = this.$el;
+            focusable.scrollEl = this.$el;
           }
+          this.onStart();
           // if (!restart) {
           //     this.$nextTick(() => {
           //         this.requestFocus();
@@ -82,9 +84,11 @@ define(["vue", "js/components/index"], (Vue) => {
         _onStop() {
           LifeCycle(this, "onStop");
           this.onStop();
+          this.$emit("onStop");
+          $("#" + pageId).remove();
         },
-        onStart() {},
-        onStop() {},
+        onStart() { },
+        onStop() { },
         themeDark() {
           // $("#theme-color").attr("content","rgb(0,0,0)");
           var meta = document.getElementsByTagName("meta");
@@ -104,7 +108,6 @@ define(["vue", "js/components/index"], (Vue) => {
     vue.$mount();
     let pageId = "_Page_" + createPageId();
     vue.$el.id = pageId;
-    $("#app").append(vue.$el);
     Pages.push({ id: pageId, vue: vue });
     return vue;
   };

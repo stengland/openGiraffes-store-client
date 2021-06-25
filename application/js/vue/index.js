@@ -24,7 +24,7 @@ define(["js/vue/vue.runtime.min", "js/vue/vue-i18n.min", "js/locales"], (
         );
       });
       vnode.context &&
-        vnode.context.$on("hook:activated", () => {
+        vnode.context.$on("onStart", () => {
           keep(el);
         });
     },

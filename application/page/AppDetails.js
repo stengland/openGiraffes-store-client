@@ -4,12 +4,18 @@ define(["app"], (App) => {
       data() {
         return {
           pageOptions: this.createPageOptions(),
+          focusType: null,
+          tab: null,
+          screenshots: null,
           data: params.data,
           data1: {
             name: "KaiAuth",
             description: "Simple Google Authenticator alternative",
             icon: "/icons/icon.png",
             screenshots: [
+              "/icons/icon.png",
+              "/icons/icon.png",
+              "/icons/icon.png",
               "/icons/icon.png",
               "/icons/icon.png",
               "/icons/icon.png",
@@ -72,12 +78,29 @@ define(["app"], (App) => {
                       : this.$t("Tracking_no")
                   ),
                 ]),
-                h("div", { class: "Tabs w-100 flex-h middle " }, [
+                h("div", {
+                  class: "Tabs w-100 flex-h middle ",
+                  ref: "Tabs",
+                  attrs: { focusable: true },
+                  on: {
+                    onFocus: () => {
+                      focusable.requestFocus(this.$refs.Tab[this.tab || 0]);
+                    },
+                  }
+                }, [
                   h(
                     "div",
                     {
                       class: "Item flex-h middle center",
+                      refInFor: true,
+                      ref: "Tab",
                       attrs: { selected: true, focusable: true },
+                      on: {
+                        onFocus: () => {
+                          this.tab = 0;
+                          this.focusType = "Tabs";
+                        },
+                      },
                     },
                     this.$t("description")
                   ),
@@ -85,18 +108,33 @@ define(["app"], (App) => {
                 h("div", { class: "Details Part w-100" }, [
                   this.data.screenshots && this.data.screenshots.length
                     ? h(
-                        "div",
-                        {
-                          class: "ScreenshotsLayout flex-h ",
-                        },
-                        this.data.screenshots.map((o) => {
-                          return h("img", {
-                            class: "Item",
-                            domProps: { src: o },
-                            attrs: { focusable: true },
-                          });
-                        })
-                      )
+                      "div",
+                      {
+                        class: "ScreenshotsLayout flex-h scroll-x",
+                        ref: "ScreenshotsLayout",
+                        attrs: { focusable: true },
+                        on: {
+                          onFocus: () => {
+                            focusable.requestFocus(this.$refs.Screenshots[this.screenshots || 0]);
+                          },
+                        }
+                      },
+                      this.data.screenshots.map((o, index) => {
+                        return h("img", {
+                          class: "Item",
+                          domProps: { src: o },
+                          attrs: { focusable: true },
+                          refInFor: true,
+                          ref: "Screenshots",
+                          on: {
+                            onFocus: () => {
+                              this.screenshots = index;
+                              this.focusType = "Screenshots";
+                            },
+                          }
+                        });
+                      })
+                    )
                     : null,
                   h(
                     "div",
@@ -133,12 +171,13 @@ define(["app"], (App) => {
           ]
         );
       },
-      mounted() {},
+      mounted() {
+      },
       methods: {
         onStart() {
           this.themeLight();
-          this.requestFocus();
           focusable.scrollEl = this.$refs.Content;
+          this.requestFocus();
         },
         createPageOptions() {
           let context = this;

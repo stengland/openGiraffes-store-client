@@ -92,7 +92,7 @@
   border: 2px solid var(--colorPrimary);
 }
 .AppDetails.Page .Content > .Details > .ScreenshotsLayout > .Item + .Item {
-  margin-left: 8px;
+  margin-left: 7px;
 }
 .AppDetails.Page .Content > .Details > .VersionLayout {
   font-size: 10px;
