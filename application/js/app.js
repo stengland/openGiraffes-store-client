@@ -87,8 +87,8 @@ define(["vue", "js/components/index"], (Vue) => {
           this.$emit("onStop");
           $("#" + pageId).remove();
         },
-        onStart() { },
-        onStop() { },
+        onStart() {},
+        onStop() {},
         themeDark() {
           // $("#theme-color").attr("content","rgb(0,0,0)");
           var meta = document.getElementsByTagName("meta");

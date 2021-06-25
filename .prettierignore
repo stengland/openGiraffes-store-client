@@ -8,5 +8,6 @@
 **/vue.runtime.min.js
 **/vue-i18n.min.js
 
+.github
 build
 node_modules

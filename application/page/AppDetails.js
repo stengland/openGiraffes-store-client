@@ -78,63 +78,69 @@ define(["app"], (App) => {
                       : this.$t("Tracking_no")
                   ),
                 ]),
-                h("div", {
-                  class: "Tabs w-100 flex-h middle ",
-                  ref: "Tabs",
-                  attrs: { focusable: true },
-                  on: {
-                    onFocus: () => {
-                      focusable.requestFocus(this.$refs.Tab[this.tab || 0]);
-                    },
-                  }
-                }, [
-                  h(
-                    "div",
-                    {
-                      class: "Item flex-h middle center",
-                      refInFor: true,
-                      ref: "Tab",
-                      attrs: { selected: true, focusable: true },
-                      on: {
-                        onFocus: () => {
-                          this.tab = 0;
-                          this.focusType = "Tabs";
-                        },
+                h(
+                  "div",
+                  {
+                    class: "Tabs w-100 flex-h middle ",
+                    ref: "Tabs",
+                    attrs: { focusable: true },
+                    on: {
+                      onFocus: () => {
+                        focusable.requestFocus(this.$refs.Tab[this.tab || 0]);
                       },
                     },
-                    this.$t("description")
-                  ),
-                ]),
+                  },
+                  [
+                    h(
+                      "div",
+                      {
+                        class: "Item flex-h middle center",
+                        refInFor: true,
+                        ref: "Tab",
+                        attrs: { selected: true, focusable: true },
+                        on: {
+                          onFocus: () => {
+                            this.tab = 0;
+                            this.focusType = "Tabs";
+                          },
+                        },
+                      },
+                      this.$t("description")
+                    ),
+                  ]
+                ),
                 h("div", { class: "Details Part w-100" }, [
                   this.data.screenshots && this.data.screenshots.length
                     ? h(
-                      "div",
-                      {
-                        class: "ScreenshotsLayout flex-h scroll-x",
-                        ref: "ScreenshotsLayout",
-                        attrs: { focusable: true },
-                        on: {
-                          onFocus: () => {
-                            focusable.requestFocus(this.$refs.Screenshots[this.screenshots || 0]);
-                          },
-                        }
-                      },
-                      this.data.screenshots.map((o, index) => {
-                        return h("img", {
-                          class: "Item",
-                          domProps: { src: o },
+                        "div",
+                        {
+                          class: "ScreenshotsLayout flex-h scroll-x",
+                          ref: "ScreenshotsLayout",
                           attrs: { focusable: true },
-                          refInFor: true,
-                          ref: "Screenshots",
                           on: {
                             onFocus: () => {
-                              this.screenshots = index;
-                              this.focusType = "Screenshots";
+                              focusable.requestFocus(
+                                this.$refs.Screenshots[this.screenshots || 0]
+                              );
                             },
-                          }
-                        });
-                      })
-                    )
+                          },
+                        },
+                        this.data.screenshots.map((o, index) => {
+                          return h("img", {
+                            class: "Item",
+                            domProps: { src: o },
+                            attrs: { focusable: true },
+                            refInFor: true,
+                            ref: "Screenshots",
+                            on: {
+                              onFocus: () => {
+                                this.screenshots = index;
+                                this.focusType = "Screenshots";
+                              },
+                            },
+                          });
+                        })
+                      )
                     : null,
                   h(
                     "div",
@@ -171,8 +177,7 @@ define(["app"], (App) => {
           ]
         );
       },
-      mounted() {
-      },
+      mounted() {},
       methods: {
         onStart() {
           this.themeLight();

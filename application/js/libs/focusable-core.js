@@ -37,12 +37,12 @@ const defineFocusable = function (z) {
     window.CustomEvent = r;
   })();
   var v = {
-    KEY_LEFT: [37, 21],
-    KEY_UP: [38, 19],
-    KEY_RIGHT: [39, 22],
-    KEY_DOWN: [40, 20],
-    KEY_ENTER: [13, 23],
-  },
+      KEY_LEFT: [37, 21],
+      KEY_UP: [38, 19],
+      KEY_RIGHT: [39, 22],
+      KEY_DOWN: [40, 20],
+      KEY_ENTER: [13, 23],
+    },
     A = { type: "left", event: new CustomEvent("left", { detail: {} }) },
     B = { type: "right", event: new CustomEvent("right", { detail: {} }) },
     E = { type: "up", event: new CustomEvent("up", { detail: {} }) },
@@ -61,7 +61,7 @@ const defineFocusable = function (z) {
           d = f.length ? f[f.length - 1] : d[0];
           -1 !== a._KEYS.KEY_ENTER.indexOf(c) &&
             (clearTimeout(H),
-              0 === G && (a.preventDefault(b), d.click(), (G = 0)));
+            0 === G && (a.preventDefault(b), d.click(), (G = 0)));
         }
         G = I = 0;
       };
@@ -73,7 +73,7 @@ const defineFocusable = function (z) {
             h = f.length ? f[f.length - 1] : d[0];
           -1 !== a._KEYS.KEY_ENTER.indexOf(c)
             ? 0 === I &&
-            ((I = 1),
+              ((I = 1),
               (H = setTimeout(function () {
                 G++;
                 h.dispatchEvent(
@@ -82,13 +82,13 @@ const defineFocusable = function (z) {
                 clearTimeout(H);
               }, a._longPressTime)))
             : -1 !== a._KEYS.KEY_LEFT.indexOf(c)
-              ? (a.preventDefault(b), a.keyEvent(A, h))
-              : -1 !== a._KEYS.KEY_UP.indexOf(c)
-                ? (a.preventDefault(b), a.keyEvent(E, h))
-                : -1 !== a._KEYS.KEY_DOWN.indexOf(c)
-                  ? (a.preventDefault(b), a.keyEvent(J, h))
-                  : -1 !== a._KEYS.KEY_RIGHT.indexOf(c) &&
-                  (a.preventDefault(b), a.keyEvent(B, h));
+            ? (a.preventDefault(b), a.keyEvent(A, h))
+            : -1 !== a._KEYS.KEY_UP.indexOf(c)
+            ? (a.preventDefault(b), a.keyEvent(E, h))
+            : -1 !== a._KEYS.KEY_DOWN.indexOf(c)
+            ? (a.preventDefault(b), a.keyEvent(J, h))
+            : -1 !== a._KEYS.KEY_RIGHT.indexOf(c) &&
+              (a.preventDefault(b), a.keyEvent(B, h));
         }
       };
       a.init = function (b) {
@@ -128,8 +128,8 @@ const defineFocusable = function (z) {
           ? c
             ? a.doScroll(b, c)
             : setTimeout(function () {
-              a.doScroll(b, c);
-            }, 100)
+                a.doScroll(b, c);
+              }, 100)
           : a.doScroll(b, c);
       };
       a.getElementByPath = a.getElementByPath;
@@ -257,16 +257,16 @@ const defineFocusable = function (z) {
       set: function (a) {
         null !== a
           ? (document.querySelectorAll("[focusable]").forEach(function (b) {
-            b.setAttribute("focusdisable", "");
-            b.removeAttribute("focusable");
-          }),
+              b.setAttribute("focusdisable", "");
+              b.removeAttribute("focusable");
+            }),
             a.querySelectorAll("[focusdisable]").forEach(function (b) {
               b.setAttribute("focusable", "");
               b.removeAttribute("focusdisable");
             }))
           : (document.querySelectorAll("[focusable]").forEach(function (b) {
-            b.removeAttribute("focusdisable");
-          }),
+              b.removeAttribute("focusdisable");
+            }),
             document.querySelectorAll("[focusdisable]").forEach(function (b) {
               b.setAttribute("focusable", "");
               b.removeAttribute("focusdisable");
@@ -318,14 +318,14 @@ const defineFocusable = function (z) {
                 return scrollEl
                   ? scrollEl.scrollTop
                   : document.body.scrollTop ||
-                  document.documentElement.scrollTop ||
-                  window.pageYOffset;
+                      document.documentElement.scrollTop ||
+                      window.pageYOffset;
               if ("scrollLeft" === c)
                 return scrollEl
                   ? scrollEl.scrollLeft
                   : document.body.scrollLeft ||
-                  document.documentElement.scrollLeft ||
-                  window.pageXOffset;
+                      document.documentElement.scrollLeft ||
+                      window.pageXOffset;
             },
             setNumFn: function (f) {
               "scrollTop" === c &&
@@ -390,25 +390,25 @@ const defineFocusable = function (z) {
               ? "down" === d || "up" === d
                 ? a.scrollFn(y + f - u, "scrollTop", c, scrollEl)
                 : "left" === d || "right" === d
-                  ? a.scrollFn(x + h - m, "scrollLeft", c, scrollEl)
-                  : b.top > b.left
-                    ? (a.scrollFn(x + h - m, "scrollLeft", c, scrollEl),
-                      a.scrollFn(y + f - u, "scrollTop", c, scrollEl))
-                    : (a.scrollFn(y + f - u, "scrollTop", c, scrollEl),
-                      a.scrollFn(x + h - m, "scrollLeft", c, scrollEl))
+                ? a.scrollFn(x + h - m, "scrollLeft", c, scrollEl)
+                : b.top > b.left
+                ? (a.scrollFn(x + h - m, "scrollLeft", c, scrollEl),
+                  a.scrollFn(y + f - u, "scrollTop", c, scrollEl))
+                : (a.scrollFn(y + f - u, "scrollTop", c, scrollEl),
+                  a.scrollFn(x + h - m, "scrollLeft", c, scrollEl))
               : ((d = k + b.height),
                 d > w &&
-                ((d = d - w + f + a._offsetDistance),
+                  ((d = d - w + f + a._offsetDistance),
                   a.scrollFn(d, "scrollTop", c, scrollEl)),
                 0 > k &&
-                ((d = k + f - a._offsetDistance),
+                  ((d = k + f - a._offsetDistance),
                   a.scrollFn(d, "scrollTop", c, scrollEl)),
                 (d = p + b.width),
                 d > g &&
-                ((d = d - g + h + a._offsetDistance),
+                  ((d = d - g + h + a._offsetDistance),
                   a.scrollFn(d, "scrollLeft", c, scrollEl)),
                 0 > p &&
-                ((d = p + h - a._offsetDistance),
+                  ((d = p + h - a._offsetDistance),
                   a.scrollFn(d, "scrollLeft", c, scrollEl)));
           }
         };
@@ -419,7 +419,7 @@ const defineFocusable = function (z) {
           else if ("right" === b || "left" === b) k = d;
           k <= w &&
             ((b = Math.min(c + d, f.dis)),
-              b != f.dis && ((f.dis = b), (f.el = h)));
+            b != f.dis && ((f.dis = b), (f.el = h)));
           return f;
         };
         a.getNextFocusElement = function (b) {
@@ -441,24 +441,24 @@ const defineFocusable = function (z) {
             t = [g.top + m, g.right - p, g.bottom - m, g.left + p];
           "up" === b &&
             ((d = g.left + g.width / 2),
-              (u = Math.round(g.bottom - m)),
-              (x = g.left + p),
-              (y = g.left + g.width - p));
+            (u = Math.round(g.bottom - m)),
+            (x = g.left + p),
+            (y = g.left + g.width - p));
           "right" === b &&
             ((u = g.top + g.height / 2),
-              (d = Math.round(g.left + p)),
-              (x = g.top + m),
-              (y = g.top + g.height - m));
+            (d = Math.round(g.left + p)),
+            (x = g.top + m),
+            (y = g.top + g.height - m));
           "down" === b &&
             ((d = g.left + g.width / 2),
-              (u = Math.round(g.top + m)),
-              (x = g.left + p),
-              (y = g.left + g.width - p));
+            (u = Math.round(g.top + m)),
+            (x = g.left + p),
+            (y = g.left + g.width - p));
           "left" === b &&
             ((u = g.top + g.height / 2),
-              (d = Math.round(g.right - p)),
-              (x = g.top + m),
-              (y = g.top + g.height - m));
+            (d = Math.round(g.right - p)),
+            (x = g.top + m),
+            (y = g.top + g.height - m));
           g = !1;
           for (p = 0; p < c.length; p++) {
             m = c[p];
@@ -513,13 +513,13 @@ const defineFocusable = function (z) {
                     n != h && ((h = n), (f = m)))
                   : ((n = Math.min(k, n)),
                     n != k &&
-                    ((k = n),
+                      ((k = n),
                       (h = Math.min(Math.sqrt(e * e + q * q), h)),
                       (f = m)));
               } else
                 g ||
                   ((n = Math.min(Math.sqrt(e * e + q * q), h)),
-                    n != h && ((h = n), (f = m)));
+                  n != h && ((h = n), (f = m)));
             }
           }
           return 1 === a._findFocusType ? f : w.el || f;
@@ -570,7 +570,7 @@ const defineFocusable = function (z) {
             );
             var c = [],
               d = b.iterateNext();
-            for (d && c.push(d); d;) (d = b.iterateNext()) && c.push(d);
+            for (d && c.push(d); d; ) (d = b.iterateNext()) && c.push(d);
             return c;
           };
           a.addClassName = function (b, c) {
@@ -579,17 +579,17 @@ const defineFocusable = function (z) {
           a.addAttrName = function (b, c) {
             a.focusOriginalEl !== b &&
               ((a.focusOriginalSize = b.getBoundingClientRect()),
-                (a.focusOriginalEl = b));
+              (a.focusOriginalEl = b));
             var d = document.querySelector("[focused]");
             d &&
               (d.removeAttribute(c),
-                a.removeOneClassName(d, a._focusClassName));
+              a.removeOneClassName(d, a._focusClassName));
             b.setAttribute(c, "");
             "focused" === c &&
               (a.addClassName(b, a._focusClassName),
-                b.dispatchEvent(
-                  new CustomEvent("onFocus", { detail: { el: b } })
-                ));
+              b.dispatchEvent(
+                new CustomEvent("onFocus", { detail: { el: b } })
+              ));
           };
           a.inNode = function (b, c) {
             return c !== b && c.contains(b);
@@ -614,7 +614,7 @@ const defineFocusable = function (z) {
           if (!a.time) return a.setNumFn && a.setNumFn(a.number), a.number;
           null != this.scrollTimer &&
             (clearInterval(this.scrollTimer),
-              this.lastOpt.setNumFn &&
+            this.lastOpt.setNumFn &&
               this.lastOpt.setNumFn(this.lastOpt.number));
           this.lastOpt = a;
           var c = a.time / 20,
