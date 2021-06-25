@@ -12,20 +12,38 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Package application.zip
+      - name: Package application.zip (openKaiOS Database)
         run: |
           ls application
           cd application
           zip -r application.zip ./*
           mv application.zip ../application.zip
           cd ..
-          zip -r openkaios-store-nightly.zip application.zip metadata.json
           mkdir workdir
           mv application.zip workdir/application.zip
           mv metadata.json workdir/metadata.json
 
-      - name: Build artifact
+      - name: Build artifact (openKaiOS Database)
         uses: actions/upload-artifact@v2
         with:
-          name: openkaios-store-nightly
+          name: openkaios-store-openkaios-nightly
           path: ./workdir/*
+          
+      - name: Package application.zip (bHackers Database)
+        run: |
+          cp databases/server-info-bhackers.js application/js/server-info.js
+          ls application
+          cd application
+          zip -r application.zip ./*
+          mv application.zip ../application.zip
+          cd ..
+          mkdir workdir2
+          mv application.zip workdir2/application.zip
+          mv metadata.json workdir2/metadata.json
+
+      - name: Build artifact (bHackers Database)
+        uses: actions/upload-artifact@v2
+        with:
+          name: openkaios-store-bhackers-nightly
+          path: ./workdir2/*
+
