@@ -7,6 +7,7 @@
 **/text.min.js
 **/vue.runtime.min.js
 **/vue-i18n.min.js
+**/locales.js
 
 .github
 build

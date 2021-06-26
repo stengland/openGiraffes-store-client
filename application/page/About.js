@@ -23,7 +23,7 @@ define(["app"], (App) => {
               },
               [
                 h("div", {}, "openKaiOS Store"),
-                h("div", {}, "基于 bHacker Store 的第三方应用商店。"),
+                h("div", {}, this.$t("Based")),
                 h("div", {}, "Contributors"),
                 h("div", {}, params.contributors),
                 h("div", {}, "Respect"),
@@ -32,12 +32,12 @@ define(["app"], (App) => {
                   {},
                   "Respect the licenses of the apps, it would be nice if you use app more often to support the developer with a donation. Thanks!"
                 ),
-                h("div", {}, "隐私政策和使用条款"),
-                h("div", {}, "参见：" + server_info.terms),
+                h("div", {}, this.$t("Terms")),
+                h("div", {}, this.$t("Terms_see") + server_info.terms),
               ]
             ),
             h("div", { class: "UpdateTime flex-h center" }, [
-              h("div", {}, "更新时间：" + params.updateTime),
+              h("div", {}, this.$t("Update_time") + params.updateTime),
             ]),
           ]
         );
