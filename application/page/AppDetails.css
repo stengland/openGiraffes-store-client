@@ -112,3 +112,11 @@
   font-size: 10px;
   color: var(--colorPrimary);
 }
+.AppDetails.Page .Content > .Details > .Tags,
+.AppDetails.Page .Content > .Details > .Maintainer,
+.AppDetails.Page .Content > .Details > .Dependencies,
+.AppDetails.Page .Content > .Details > .Locales,
+.AppDetails.Page .Content > .Details > .License {
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.4);
+}

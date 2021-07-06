@@ -8,6 +8,7 @@ define(["app"], (App) => {
           tab: null,
           screenshots: null,
           data: params.data,
+          depend_temp: [],
           data1: {
             name: "KaiAuth",
             description: "Simple Google Authenticator alternative",
@@ -150,6 +151,13 @@ define(["app"], (App) => {
                     },
                     this.data.description
                   ),
+                  h(
+                    "div",
+                    { class: "Tags" },
+                    [this.$t("App_tags"), this.data.meta.tags].join(
+                      "："
+                    )
+                  ),
                   h("div", { class: "VersionLayout flex-h w-100" }, [
                     h(
                       "div",
@@ -167,7 +175,35 @@ define(["app"], (App) => {
                   h(
                     "div",
                     { class: "Author" },
-                    [this.$t("App_author"), this.data.author.join("，")].join(
+                    [this.$t("App_author"), this.data.author.join(", ")].join(
+                      "："
+                    )
+                  ),
+                  h(
+                    "div",
+                    { class: "Maintainer" },
+                    [this.$t("App_maintainer"), this.data.maintainer.join(", ")].join(
+                      "："
+                    )
+                  ),
+                  h(
+                    "div",
+                    { class: "Dependencies" },
+                    [this.$t("App_dependencies"), this.depend_temp.join(", ")].join(
+                      "："
+                    )
+                  ),
+                  h(
+                    "div",
+                    { class: "Locales" },
+                    [this.$t("App_locale"), this.data.locales.join(", ")].join(
+                      "："
+                    )
+                  ),
+                  h(
+                    "div",
+                    { class: "License" },
+                    [this.$t("App_license"), this.data.license].join(
                       "："
                     )
                   ),
@@ -183,6 +219,13 @@ define(["app"], (App) => {
           this.themeLight();
           focusable.scrollEl = this.$refs.Content;
           this.requestFocus();
+          if (this.data.dependencies.length === 0) {
+            this.depend_temp = ["(None)"];
+          } else {
+            this.data.dependencies.forEach((depend) => {
+              this.depend_temp.push(depend.name);
+            });
+          };
         },
         createPageOptions() {
           let context = this;
