@@ -7,28 +7,28 @@
 .Album.Page .NavigationBar {
     color: white;
 }
-.Album.Page .Image{
+.Album.Page .Image {
     object-fit: contain;
 }
-.Album.Page .Indicator{
+.Album.Page .Indicator {
     color: black;
     margin-top: 5px;
     height: 20px;
 }
-.Album.Page .Indicator>.Item{
+.Album.Page .Indicator > .Item {
     background: white;
     color: black;
     border-radius: 20px;
     font-size: 0;
     width: 5px;
     height: 5px;
-    transition: width 0.2s,height 0.2s;
+    transition: width 0.2s, height 0.2s;
 }
-.Album.Page .Indicator>.Item[selected]{
+.Album.Page .Indicator > .Item[selected] {
     font-size: 12px;
     width: 15px;
     height: 15px;
 }
-.Album.Page .Indicator>.Item+.Item{
+.Album.Page .Indicator > .Item + .Item {
     margin-left: 10px;
 }

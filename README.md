@@ -6,8 +6,8 @@ An alternative app store by free developers for free devices.
 
 ## TODO List
 
-- [ ] Upgrade app
-- [ ] Upgrade self
+-   [ ] Upgrade app
+-   [ ] Upgrade self
 
 ## Contributing
 

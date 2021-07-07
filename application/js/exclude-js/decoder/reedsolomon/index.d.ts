@@ -1,4 +1,4 @@
 export declare function decode(
-  bytes: number[],
-  twoS: number
+    bytes: number[],
+    twoS: number
 ): Uint8ClampedArray;
