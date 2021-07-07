@@ -153,59 +153,65 @@ define(["app"], (App) => {
                   ),
                   h(
                     "div",
-                    { class: "Tags" },
-                    [this.$t("App_tags"), this.data.meta.tags].join(
-                      "："
-                    )
+                    { class: "Tags", attrs: { focusable: true } },
+                    [this.$t("App_tags"), this.data.meta.tags].join("：")
                   ),
-                  h("div", { class: "VersionLayout flex-h w-100" }, [
-                    h(
-                      "div",
-                      { class: "Version" },
-                      [this.$t("App_version"), this.data.download.version].join(
-                        "："
-                      )
-                    ),
-                    h(
-                      "div",
-                      { class: "Type" },
-                      [this.$t("App_type"), this.data.type].join("：")
-                    ),
-                  ]),
                   h(
                     "div",
-                    { class: "Author" },
+                    {
+                      class: "VersionLayout flex-h w-100",
+                      attrs: { focusable: true },
+                    },
+                    [
+                      h(
+                        "div",
+                        { class: "Version" },
+                        [
+                          this.$t("App_version"),
+                          this.data.download.version,
+                        ].join("：")
+                      ),
+                      h(
+                        "div",
+                        { class: "Type" },
+                        [this.$t("App_type"), this.data.type].join("：")
+                      ),
+                    ]
+                  ),
+                  h(
+                    "div",
+                    { class: "Author", attrs: { focusable: true } },
                     [this.$t("App_author"), this.data.author.join(", ")].join(
                       "："
                     )
                   ),
                   h(
                     "div",
-                    { class: "Maintainer" },
-                    [this.$t("App_maintainer"), this.data.maintainer.join(", ")].join(
-                      "："
-                    )
+                    { class: "Maintainer", attrs: { focusable: true } },
+                    [
+                      this.$t("App_maintainer"),
+                      this.data.maintainer.join(", "),
+                    ].join("：")
                   ),
                   h(
                     "div",
-                    { class: "Dependencies" },
-                    [this.$t("App_dependencies"), this.depend_temp.join(", ")].join(
-                      "："
-                    )
+                    { class: "Dependencies", attrs: { focusable: true } },
+                    [
+                      this.$t("App_dependencies"),
+                      this.depend_temp.join(", "),
+                    ].join("：")
                   ),
                   h(
                     "div",
-                    { class: "Locales" },
+                    { class: "Locales", attrs: { focusable: true } },
                     [this.$t("App_locale"), this.data.locales.join(", ")].join(
                       "："
                     )
                   ),
                   h(
                     "div",
-                    { class: "License" },
-                    [this.$t("App_license"), this.data.license].join(
-                      "："
-                    )
+                    { class: "License", attrs: { focusable: true } },
+                    [this.$t("App_license"), this.data.license].join("：")
                   ),
                 ]),
               ]
@@ -225,7 +231,7 @@ define(["app"], (App) => {
             this.data.dependencies.forEach((depend) => {
               this.depend_temp.push(depend.name);
             });
-          };
+          }
         },
         createPageOptions() {
           let context = this;
