@@ -2,7 +2,7 @@
     "version": "2.0.3",
     "name": "openGiraffes Store",
     "description": "An app to download and install apps",
-    "origin": "app://store.opengiraffes.com",
+    "origin": "app://store.opengiraffes.top",
     "launch_path": "/index.html",
     "type": "certified",
     "fullscreen": "false",
@@ -18,7 +18,7 @@
 
     "developer": {
         "name": "openGiraffes",
-        "url": "https://opengiraffes.com"
+        "url": "https://opengiraffes.top"
     },
 
     "permissions": {
