@@ -138,6 +138,15 @@ define(["app"], (App) => {
                                 this.screenshots = index;
                                 this.focusType = "Screenshots";
                               },
+                              click:()=>{
+                                App.startPage({
+                                    name: "Album",
+                                    params: {
+                                      items: this.data.screenshots,
+                                      index:index,
+                                    },
+                                  });
+                              }
                             },
                           });
                         })
