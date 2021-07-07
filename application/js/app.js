@@ -90,14 +90,12 @@ define(["vue", "js/components/index"], (Vue) => {
         onStart() {},
         onStop() {},
         themeDark() {
-          // $("#theme-color").attr("content","rgb(0,0,0)");
-          var meta = document.getElementsByTagName("meta");
-          meta["theme-color"].setAttribute("content", "transparent");
+          const meta = document.head.querySelector('meta[name="theme-color"]');
+          meta.setAttribute("content", "rgb(0, 0, 0)");
         },
         themeLight() {
-          // $("#theme-color").attr("content","rgb(255,255,255)");
-          var meta = document.getElementsByTagName("meta");
-          meta["theme-color"].setAttribute("content", "rgb(255, 255, 255)");
+          const meta = document.head.querySelector('meta[name="theme-color"]');
+          meta.setAttribute("content", "rgb(255, 255, 255)");
         },
       },
     });
