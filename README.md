@@ -1,6 +1,6 @@
 ![logo](images/icon.png)
 
-## openKaiOS Store
+## openGiraffes Store
 
 An alternative app store by free developers for free devices.
 

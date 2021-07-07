@@ -22,7 +22,7 @@ define(["app"], (App) => {
                                 ref: "Content",
                             },
                             [
-                                h("div", {}, "openKaiOS Store"),
+                                h("div", {}, "openGiraffes Store"),
                                 h("div", {}, this.$t("Based")),
                                 h("div", {}, "Contributors"),
                                 h("div", {}, params.contributors),

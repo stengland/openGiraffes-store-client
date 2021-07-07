@@ -1,8 +1,8 @@
 {
     "version": "2.0.3",
-    "name": "openKaiOS Store",
+    "name": "openGiraffes Store",
     "description": "An app to download and install apps",
-    "origin": "app://store.openkaios.top",
+    "origin": "app://store.opengiraffes.com",
     "launch_path": "/index.html",
     "type": "certified",
     "fullscreen": "false",
@@ -17,8 +17,8 @@
     },
 
     "developer": {
-        "name": "openKaiOS",
-        "url": "https://openkaios.top"
+        "name": "openGiraffes",
+        "url": "https://opengiraffes.com"
     },
 
     "permissions": {
@@ -48,8 +48,8 @@
     },
     "locales": {
         "zh-CN": {
-            "name": "openKaiOS Store",
-            "description": "openKaiOS 应用商店"
+            "name": "openGiraffes Store",
+            "description": "openGiraffes 应用商店"
         }
     },
     "default_locale": "zh-CN"

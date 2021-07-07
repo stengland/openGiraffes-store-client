@@ -333,7 +333,7 @@ define(["app"], (App) => {
                     categories = Object.keys(categories).map((key) => {
                         let item = categories[key];
                         let name = item.name;
-                        if (server_info.name === "openkaios") {
+                        if (server_info.name === "opengiraffes") {
                             let locales_name =
                                 item.locales &&
                                 item.locales.length &&
