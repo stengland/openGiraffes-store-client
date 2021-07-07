@@ -161,13 +161,7 @@ define(["app"], (App) => {
                       },
                     },
                     [
-                      h("img", {
-                        class: "Icon",
-                        domProps: {
-                          src: item.icon,
-                          key: `Icon-${this.tab}-${index}`,
-                        },
-                      }),
+                      h("img", { class: "Icon", domProps: {src: item.icon,},}),
                       h("div", { class: "Right flex-v flex-1" }, [
                         h("div", { class: "Title ellipsis" }, item.name),
                         h("div", { class: "Info ellipsis" }, item.tags),
@@ -190,7 +184,10 @@ define(["app"], (App) => {
       },
       watch: {
         tab(value) {
-          this.items = this.tabs[value].apps;
+            this.items = [];
+            this.$nextTick(()=>{
+                this.items = this.tabs[value].apps;
+            })
         },
       },
       methods: {
