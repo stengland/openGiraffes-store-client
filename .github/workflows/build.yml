@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Package application.zip (openKaiOS Database)
+      - name: Package application.zip (openGiraffes Database)
         run: |
           ls application
           cd application
@@ -23,10 +23,10 @@ jobs:
           mv application.zip workdir/application.zip
           cp metadata.json workdir/metadata.json
 
-      - name: Build artifact (openKaiOS Database)
+      - name: Build artifact (openGiraffes Database)
         uses: actions/upload-artifact@v2
         with:
-          name: openkaios-store-openkaios-nightly
+          name: openGiraffes-store-openGiraffes-nightly
           path: ./workdir/*
           
       - name: Package application.zip (bHackers Database)
@@ -44,6 +44,6 @@ jobs:
       - name: Build artifact (bHackers Database)
         uses: actions/upload-artifact@v2
         with:
-          name: openkaios-store-bhackers-nightly
+          name: openGiraffes-store-bHackers-nightly
           path: ./workdir2/*
 
