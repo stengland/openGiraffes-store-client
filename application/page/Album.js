@@ -21,7 +21,7 @@ define(["app"], (App) => {
                   class: "Image flex-1 flex-v center",
                   ref: "Image",
                   domProps: { src: this.items[this.index] },
-                }, ),
+                }),
               h("div", { class: "Indicator flex-h center middle" },this.items.map((item,index)=>{
                   return h("div", { class:"Item flex-h center middle" ,attrs: { selected: index == this.index,}}, index+1 );
               })),
