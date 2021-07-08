@@ -91,14 +91,16 @@ define(["app"], (App) => {
                                 video.onloadedmetadata = (e) => {
                                     video.play();
 
-                                    var barcodeCanvas =
-                                        document.createElement("canvas");
+                                    var barcodeCanvas = document.createElement(
+                                        "canvas"
+                                    );
                                     let intv = setInterval(() => {
                                         barcodeCanvas.width = video.videoWidth;
                                         barcodeCanvas.height =
                                             video.videoHeight;
-                                        var barcodeContext =
-                                            barcodeCanvas.getContext("2d");
+                                        var barcodeContext = barcodeCanvas.getContext(
+                                            "2d"
+                                        );
                                         var imageWidth = video.videoWidth,
                                             imageHeight = video.videoHeight;
                                         barcodeContext.drawImage(
@@ -109,13 +111,12 @@ define(["app"], (App) => {
                                             imageHeight
                                         );
 
-                                        var imageData =
-                                            barcodeContext.getImageData(
-                                                0,
-                                                0,
-                                                imageWidth,
-                                                imageHeight
-                                            );
+                                        var imageData = barcodeContext.getImageData(
+                                            0,
+                                            0,
+                                            imageWidth,
+                                            imageHeight
+                                        );
                                         var idd = imageData.data;
 
                                         let code = jsQR(
