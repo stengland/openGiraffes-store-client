@@ -24,8 +24,7 @@ define(["app"], (App) => {
                         website: "https://kaiauth.zjyl1994.com",
                         git_repo: "https://github.com/zjyl1994/KaiAuth",
                         download: {
-                            url:
-                                "https://git.yumenaka.net/https://github.com/zjyl1994/KaiAuth/releases/download/v1.1.1/kaiauth-v1.1.1-omnisd.zip",
+                            url: "https://git.yumenaka.net/https://github.com/zjyl1994/KaiAuth/releases/download/v1.1.1/kaiauth-v1.1.1-omnisd.zip",
                             version: "1.1.1",
                         },
                         type: "privileged",
@@ -113,8 +112,7 @@ define(["app"], (App) => {
                                         h(
                                             "div",
                                             {
-                                                class:
-                                                    "Item flex-h middle center",
+                                                class: "Item flex-h middle center",
                                                 refInFor: true,
                                                 ref: "Tab",
                                                 attrs: {
@@ -138,8 +136,7 @@ define(["app"], (App) => {
                                         ? h(
                                               "div",
                                               {
-                                                  class:
-                                                      "ScreenshotsLayout flex-h scroll-x",
+                                                  class: "ScreenshotsLayout flex-h scroll-x",
                                                   ref: "ScreenshotsLayout",
                                                   attrs: { focusable: true },
                                                   on: {
@@ -167,15 +164,15 @@ define(["app"], (App) => {
                                                           ref: "Screenshots",
                                                           on: {
                                                               onFocus: () => {
-                                                                  this.screenshots = index;
+                                                                  this.screenshots =
+                                                                      index;
                                                                   this.focusType =
                                                                       "Screenshots";
                                                               },
                                                               click: () => {
                                                                   App.startPage(
                                                                       {
-                                                                          name:
-                                                                              "Album",
+                                                                          name: "Album",
                                                                           params: {
                                                                               items: this
                                                                                   .data

@@ -1,14 +1,9 @@
-
-**/jquery.min.js
-**/applait.finder.min.js
-**/jquery.autocomplete.min.js
-**/moments.min.js
-**/require.min.js
-**/text.min.js
-**/vue.runtime.min.js
-**/vue-i18n.min.js
 **/locales.js
 
 .github
 build
 node_modules
+application/js/types/**
+application/js/exclude-js/**
+application/js/libs/**
+application/js/vue/**

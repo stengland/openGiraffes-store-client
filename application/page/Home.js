@@ -172,16 +172,18 @@ define(["app"], (App) => {
                                                 this.focusType = "Items";
                                             },
                                             left: () => {
-                                                let el = this.$refs.Tab[
-                                                    this.tab - 1
-                                                ];
+                                                let el =
+                                                    this.$refs.Tab[
+                                                        this.tab - 1
+                                                    ];
                                                 el &&
                                                     focusable.requestFocus(el);
                                             },
                                             right: () => {
-                                                let el = this.$refs.Tab[
-                                                    this.tab + 1
-                                                ];
+                                                let el =
+                                                    this.$refs.Tab[
+                                                        this.tab + 1
+                                                    ];
                                                 el &&
                                                     focusable.requestFocus(el);
                                             },
@@ -217,8 +219,7 @@ define(["app"], (App) => {
                                                 h(
                                                     "div",
                                                     {
-                                                        class:
-                                                            "Subtitle ellipsis",
+                                                        class: "Subtitle ellipsis",
                                                     },
                                                     item.description
                                                 ),
@@ -280,8 +281,8 @@ define(["app"], (App) => {
                                                 name: "About",
                                                 params: {
                                                     updateTime: this.updateTime,
-                                                    contributors: this
-                                                        .contributors,
+                                                    contributors:
+                                                        this.contributors,
                                                 },
                                             });
                                         },
