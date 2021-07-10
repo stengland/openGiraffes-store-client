@@ -31,6 +31,7 @@ jobs:
           
       - name: Package application.zip (bHackers Database)
         run: |
+          cp databases/manifest-bhackers.webapp application/manifest.webapp
           cp databases/server-info-bhackers.js application/js/server-info.js
           ls application
           cd application
