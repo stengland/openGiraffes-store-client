@@ -70,10 +70,7 @@ define(["app"], (App) => {
                                             }
                                         },
                                         arrowRight: () => {
-                                            if (
-                                                this.index + 1 <
-                                                this.items.length
-                                            ) {
+                                            if (this.index + 1 < this.items.length) {
                                                 this.index += 1;
                                             }
                                         },

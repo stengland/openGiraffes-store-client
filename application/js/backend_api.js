@@ -67,9 +67,7 @@ const BackendApi = (() => {
             fetchData(server_list[0])
                 .then(done)
                 .catch((error) => {
-                    statusCallback(
-                        "First Server wasn't reachable, trying backup"
-                    );
+                    statusCallback("First Server wasn't reachable, trying backup");
                     console.error(error);
                     fetchData(server_list[1]).then(done).catch(reject);
                 });

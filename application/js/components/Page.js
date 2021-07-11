@@ -124,41 +124,30 @@ define(["vue", "R"], function (Vue, R) {
             style_Content() {
                 return {
                     top:
-                        (this.mOptions.statusBar.show &&
-                        this.mOptions.statusBar.padding
+                        (this.mOptions.statusBar.show && this.mOptions.statusBar.padding
                             ? R.dimen.statusBarHeight
                             : 0) +
-                        (this.mOptions.toolBar.show &&
-                        this.mOptions.toolBar.padding
-                            ? R.dimen.toolBarHeight
-                            : 0) +
+                        (this.mOptions.toolBar.show && this.mOptions.toolBar.padding ? R.dimen.toolBarHeight : 0) +
                         "px",
                     bottom:
-                        (this.mOptions.navigationBar.show &&
-                        this.mOptions.navigationBar.padding
+                        (this.mOptions.navigationBar.show && this.mOptions.navigationBar.padding
                             ? R.dimen.navigationBarHeight
                             : 0) + "px",
                 };
             },
             style_StatusBar() {
                 return {
-                    backgroundColor:
-                        this.mOptions.statusBar &&
-                        this.mOptions.statusBar.backgroundColor,
+                    backgroundColor: this.mOptions.statusBar && this.mOptions.statusBar.backgroundColor,
                 };
             },
             style_ToolBar() {
                 return {
-                    backgroundColor:
-                        this.mOptions.toolBar &&
-                        this.mOptions.toolBar.backgroundColor,
+                    backgroundColor: this.mOptions.toolBar && this.mOptions.toolBar.backgroundColor,
                 };
             },
             style_NavigationBar() {
                 return {
-                    backgroundColor:
-                        this.mOptions.navigationBar &&
-                        this.mOptions.navigationBar.backgroundColor,
+                    backgroundColor: this.mOptions.navigationBar && this.mOptions.navigationBar.backgroundColor,
                 };
             },
         },

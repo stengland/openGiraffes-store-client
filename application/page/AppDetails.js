@@ -73,25 +73,16 @@ define(["app"], (App) => {
                                     h(
                                         "div",
                                         {
-                                            class: `Item ${
-                                                this.data.has_ads && "Warning"
-                                            }`,
+                                            class: `Item ${this.data.has_ads && "Warning"}`,
                                         },
-                                        this.data.has_ads
-                                            ? this.$t("Ad_has")
-                                            : this.$t("Ad_no")
+                                        this.data.has_ads ? this.$t("Ad_has") : this.$t("Ad_no")
                                     ),
                                     h(
                                         "div",
                                         {
-                                            class: `Item ${
-                                                this.data.has_tracking &&
-                                                "Warning"
-                                            }`,
+                                            class: `Item ${this.data.has_tracking && "Warning"}`,
                                         },
-                                        this.data.has_tracking
-                                            ? this.$t("Tracking_has")
-                                            : this.$t("Tracking_no")
+                                        this.data.has_tracking ? this.$t("Tracking_has") : this.$t("Tracking_no")
                                     ),
                                 ]),
                                 h(
@@ -102,11 +93,7 @@ define(["app"], (App) => {
                                         attrs: { focusable: true },
                                         on: {
                                             onFocus: () => {
-                                                focusable.requestFocus(
-                                                    this.$refs.Tab[
-                                                        this.tab || 0
-                                                    ]
-                                                );
+                                                focusable.requestFocus(this.$refs.Tab[this.tab || 0]);
                                             },
                                         },
                                     },
@@ -114,8 +101,7 @@ define(["app"], (App) => {
                                         h(
                                             "div",
                                             {
-                                                class:
-                                                    "Item flex-h middle center",
+                                                class: "Item flex-h middle center",
                                                 refInFor: true,
                                                 ref: "Tab",
                                                 attrs: {
@@ -134,62 +120,47 @@ define(["app"], (App) => {
                                     ]
                                 ),
                                 h("div", { class: "Details Part w-100" }, [
-                                    this.data.screenshots &&
-                                    this.data.screenshots.length
+                                    this.data.screenshots && this.data.screenshots.length
                                         ? h(
                                               "div",
                                               {
-                                                  class:
-                                                      "ScreenshotsLayout flex-h scroll-x",
+                                                  class: "ScreenshotsLayout flex-h scroll-x",
                                                   ref: "ScreenshotsLayout",
                                                   attrs: { focusable: true },
                                                   on: {
                                                       onFocus: () => {
                                                           focusable.requestFocus(
-                                                              this.$refs
-                                                                  .Screenshots[
-                                                                  this
-                                                                      .screenshots ||
-                                                                      0
-                                                              ]
+                                                              this.$refs.Screenshots[this.screenshots || 0]
                                                           );
                                                       },
                                                   },
                                               },
-                                              this.data.screenshots.map(
-                                                  (o, index) => {
-                                                      return h("img", {
-                                                          class: "Item",
-                                                          domProps: { src: o },
-                                                          attrs: {
-                                                              focusable: true,
+                                              this.data.screenshots.map((o, index) => {
+                                                  return h("img", {
+                                                      class: "Item",
+                                                      domProps: { src: o },
+                                                      attrs: {
+                                                          focusable: true,
+                                                      },
+                                                      refInFor: true,
+                                                      ref: "Screenshots",
+                                                      on: {
+                                                          onFocus: () => {
+                                                              this.screenshots = index;
+                                                              this.focusType = "Screenshots";
                                                           },
-                                                          refInFor: true,
-                                                          ref: "Screenshots",
-                                                          on: {
-                                                              onFocus: () => {
-                                                                  this.screenshots = index;
-                                                                  this.focusType =
-                                                                      "Screenshots";
-                                                              },
-                                                              click: () => {
-                                                                  App.startPage(
-                                                                      {
-                                                                          name:
-                                                                              "Album",
-                                                                          params: {
-                                                                              items: this
-                                                                                  .data
-                                                                                  .screenshots,
-                                                                              index: index,
-                                                                          },
-                                                                      }
-                                                                  );
-                                                              },
+                                                          click: () => {
+                                                              App.startPage({
+                                                                  name: "Album",
+                                                                  params: {
+                                                                      items: this.data.screenshots,
+                                                                      index: index,
+                                                                  },
+                                                              });
                                                           },
-                                                      });
-                                                  }
-                                              )
+                                                      },
+                                                  });
+                                              })
                                           )
                                         : null,
                                     h(
@@ -206,10 +177,7 @@ define(["app"], (App) => {
                                             class: "Tags",
                                             attrs: { focusable: true },
                                         },
-                                        [
-                                            this.$t("App_tags"),
-                                            this.data.meta.tags,
-                                        ].join("：")
+                                        [this.$t("App_tags"), this.data.meta.tags].join("：")
                                     ),
                                     h(
                                         "div",
@@ -221,18 +189,12 @@ define(["app"], (App) => {
                                             h(
                                                 "div",
                                                 { class: "Version" },
-                                                [
-                                                    this.$t("App_version"),
-                                                    this.data.download.version,
-                                                ].join("：")
+                                                [this.$t("App_version"), this.data.download.version].join("：")
                                             ),
                                             h(
                                                 "div",
                                                 { class: "Type" },
-                                                [
-                                                    this.$t("App_type"),
-                                                    this.data.type,
-                                                ].join("：")
+                                                [this.$t("App_type"), this.data.type].join("：")
                                             ),
                                         ]
                                     ),
@@ -242,10 +204,7 @@ define(["app"], (App) => {
                                             class: "Author",
                                             attrs: { focusable: true },
                                         },
-                                        [
-                                            this.$t("App_author"),
-                                            this.data.author.join(", "),
-                                        ].join("：")
+                                        [this.$t("App_author"), this.data.author.join(", ")].join("：")
                                     ),
                                     h(
                                         "div",
@@ -253,10 +212,7 @@ define(["app"], (App) => {
                                             class: "Maintainer",
                                             attrs: { focusable: true },
                                         },
-                                        [
-                                            this.$t("App_maintainer"),
-                                            this.data.maintainer.join(", "),
-                                        ].join("：")
+                                        [this.$t("App_maintainer"), this.data.maintainer.join(", ")].join("：")
                                     ),
                                     h(
                                         "div",
@@ -264,10 +220,7 @@ define(["app"], (App) => {
                                             class: "Dependencies",
                                             attrs: { focusable: true },
                                         },
-                                        [
-                                            this.$t("App_dependencies"),
-                                            this.depend_temp.join(", "),
-                                        ].join("：")
+                                        [this.$t("App_dependencies"), this.depend_temp.join(", ")].join("：")
                                     ),
                                     h(
                                         "div",
@@ -275,10 +228,7 @@ define(["app"], (App) => {
                                             class: "Locales",
                                             attrs: { focusable: true },
                                         },
-                                        [
-                                            this.$t("App_locale"),
-                                            this.locales_temp.join(", "),
-                                        ].join("：")
+                                        [this.$t("App_locale"), this.locales_temp.join(", ")].join("：")
                                     ),
                                     h(
                                         "div",
@@ -286,10 +236,7 @@ define(["app"], (App) => {
                                             class: "License",
                                             attrs: { focusable: true },
                                         },
-                                        [
-                                            this.$t("App_license"),
-                                            this.data.license,
-                                        ].join("：")
+                                        [this.$t("App_license"), this.data.license].join("：")
                                     ),
                                 ]),
                             ]
@@ -349,9 +296,7 @@ define(["app"], (App) => {
                                             if (this.after_installation) {
                                                 this.launch_app();
                                             } else {
-                                                this.download_file(
-                                                    this.data.download.url
-                                                );
+                                                this.download_file(this.data.download.url);
                                             }
                                         },
                                         softRight: () => {
@@ -372,10 +317,7 @@ define(["app"], (App) => {
 
                     xhttp.onload = () => {
                         this.installing = false;
-                        if (
-                            xhttp.readyState === xhttp.DONE &&
-                            xhttp.status === 200
-                        ) {
+                        if (xhttp.readyState === xhttp.DONE && xhttp.status === 200) {
                             let blob = xhttp.response;
                             let file = new Blob([blob], {
                                 type: "application/zip",
@@ -410,19 +352,11 @@ define(["app"], (App) => {
                                 alert(this.$t("App_mgmt_install_error_nometa"));
                             }
                             if (error.name === "AppAlreadyInstalled") {
-                                alert(
-                                    this.$t(
-                                        "App_mgmt_install_error_already_installed"
-                                    )
-                                );
+                                alert(this.$t("App_mgmt_install_error_already_installed"));
                             }
 
                             if (error.name === "InvalidPrivilegeLevel") {
-                                alert(
-                                    this.$t(
-                                        "App_mgmt_install_error_no_priviliged"
-                                    )
-                                );
+                                alert(this.$t("App_mgmt_install_error_no_priviliged"));
                                 // TODO open an guide that explains it, with links to a backup guide.
                             }
                         });
@@ -430,9 +364,7 @@ define(["app"], (App) => {
                 launch_app() {
                     var request = window.navigator.mozApps.mgmt.getAll();
                     request.onerror = (e) => {
-                        console.log(
-                            "Error calling getInstalled: " + request.error.name
-                        );
+                        console.log("Error calling getInstalled: " + request.error.name);
                     };
                     request.onsuccess = (e) => {
                         var appsRecord = request.result;

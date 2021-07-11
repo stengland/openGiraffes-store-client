@@ -64,31 +64,14 @@ define(["app"], (App) => {
                                             name: "Scan",
                                             params: {
                                                 callback: (str) => {
-                                                    if (
-                                                        !str.startsWith(
-                                                            server_info.QR_header
-                                                        )
-                                                    ) {
-                                                        alert(
-                                                            this.$t(
-                                                                "QR_invalid"
-                                                            )
-                                                        );
+                                                    if (!str.startsWith(server_info.QR_header)) {
+                                                        alert(this.$t("QR_invalid"));
                                                         return;
                                                     }
-                                                    let slug = str.replace(
-                                                        server_info.QR_header,
-                                                        ""
-                                                    );
-                                                    let find = this.apps.find(
-                                                        (o) => o.slug == slug
-                                                    );
+                                                    let slug = str.replace(server_info.QR_header, "");
+                                                    let find = this.apps.find((o) => o.slug == slug);
                                                     if (!find) {
-                                                        alert(
-                                                            this.$t(
-                                                                "App_notfound"
-                                                            )
-                                                        );
+                                                        alert(this.$t("App_notfound"));
                                                         return;
                                                     }
                                                     App.startPage({
@@ -116,10 +99,7 @@ define(["app"], (App) => {
                                 attrs: { focusable: true },
                                 on: {
                                     onFocus: () => {
-                                        this.$refs.Tab &&
-                                            focusable.requestFocus(
-                                                this.$refs.Tab[this.tab]
-                                            );
+                                        this.$refs.Tab && focusable.requestFocus(this.$refs.Tab[this.tab]);
                                     },
                                 },
                             },
@@ -150,14 +130,9 @@ define(["app"], (App) => {
                             {
                                 class: "Items flex-1 flex-v scroll-y",
                                 ref: "Items",
-                                directives: [
-                                    { name: "keep-scroll", value: true },
-                                ],
+                                directives: [{ name: "keep-scroll", value: true }],
                             },
-                            (this.searchResult
-                                ? this.searchResult
-                                : this.items
-                            ).map((item, index) => {
+                            (this.searchResult ? this.searchResult : this.items).map((item, index) => {
                                 return h(
                                     "div",
                                     {
@@ -172,18 +147,12 @@ define(["app"], (App) => {
                                                 this.focusType = "Items";
                                             },
                                             left: () => {
-                                                let el = this.$refs.Tab[
-                                                    this.tab - 1
-                                                ];
-                                                el &&
-                                                    focusable.requestFocus(el);
+                                                let el = this.$refs.Tab[this.tab - 1];
+                                                el && focusable.requestFocus(el);
                                             },
                                             right: () => {
-                                                let el = this.$refs.Tab[
-                                                    this.tab + 1
-                                                ];
-                                                el &&
-                                                    focusable.requestFocus(el);
+                                                let el = this.$refs.Tab[this.tab + 1];
+                                                el && focusable.requestFocus(el);
                                             },
                                             click: () => {
                                                 App.startPage({
@@ -200,30 +169,17 @@ define(["app"], (App) => {
                                             class: "Icon",
                                             domProps: { src: item.icon },
                                         }),
-                                        h(
-                                            "div",
-                                            { class: "Right flex-v flex-1" },
-                                            [
-                                                h(
-                                                    "div",
-                                                    { class: "Title ellipsis" },
-                                                    item.name
-                                                ),
-                                                h(
-                                                    "div",
-                                                    { class: "Info ellipsis" },
-                                                    item.tags
-                                                ),
-                                                h(
-                                                    "div",
-                                                    {
-                                                        class:
-                                                            "Subtitle ellipsis",
-                                                    },
-                                                    item.description
-                                                ),
-                                            ]
-                                        ),
+                                        h("div", { class: "Right flex-v flex-1" }, [
+                                            h("div", { class: "Title ellipsis" }, item.name),
+                                            h("div", { class: "Info ellipsis" }, item.tags),
+                                            h(
+                                                "div",
+                                                {
+                                                    class: "Subtitle ellipsis",
+                                                },
+                                                item.description
+                                            ),
+                                        ]),
                                     ]
                                 );
                             })
@@ -280,8 +236,7 @@ define(["app"], (App) => {
                                                 name: "About",
                                                 params: {
                                                     updateTime: this.updateTime,
-                                                    contributors: this
-                                                        .contributors,
+                                                    contributors: this.contributors,
                                                 },
                                             });
                                         },
@@ -323,8 +278,7 @@ define(["app"], (App) => {
                             name: item.name || "",
                             description: item.description || "",
                             tags: item.meta.tags || "",
-                            categories:
-                                (item.meta && item.meta.categories) || [],
+                            categories: (item.meta && item.meta.categories) || [],
                             slug: item.slug,
                             data: item,
                         };
@@ -335,13 +289,8 @@ define(["app"], (App) => {
                         let name = item.name;
                         if (server_info.name === "opengiraffes") {
                             let locales_name =
-                                item.locales &&
-                                item.locales.length &&
-                                item.locales.find((o) => o["zh-CN"]);
-                            if (
-                                locales_name ||
-                                navigator.language !== "en-US"
-                            ) {
+                                item.locales && item.locales.length && item.locales.find((o) => o["zh-CN"]);
+                            if (locales_name || navigator.language !== "en-US") {
                                 name = locales_name[navigator.language];
                             } else {
                                 name = item.name;
@@ -361,9 +310,7 @@ define(["app"], (App) => {
                     apps.forEach((item) => {
                         if (item.categories.length) {
                             item.categories.forEach((category) => {
-                                let findIndex = categories.findIndex(
-                                    (o) => o.id == category
-                                );
+                                let findIndex = categories.findIndex((o) => o.id == category);
                                 if (findIndex != -1) {
                                     categories[findIndex].apps.push(item);
                                 }
@@ -381,9 +328,7 @@ define(["app"], (App) => {
                         });
                     }
 
-                    this.updateTime = new Date(data.generated_at).format(
-                        "yyyy-MM-dd HH:mm"
-                    );
+                    this.updateTime = new Date(data.generated_at).format("yyyy-MM-dd HH:mm");
                     //unique author list
                     this.contributors = contributors.sort().join(", ");
 

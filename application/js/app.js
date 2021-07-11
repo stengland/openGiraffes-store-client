@@ -90,15 +90,11 @@ define(["vue", "js/components/index"], (Vue) => {
                 onStart() {},
                 onStop() {},
                 themeDark() {
-                    const meta = document.head.querySelector(
-                        'meta[name="theme-color"]'
-                    );
+                    const meta = document.head.querySelector('meta[name="theme-color"]');
                     meta.setAttribute("content", "rgb(0, 0, 0)");
                 },
                 themeLight() {
-                    const meta = document.head.querySelector(
-                        'meta[name="theme-color"]'
-                    );
+                    const meta = document.head.querySelector('meta[name="theme-color"]');
                     meta.setAttribute("content", "rgb(255, 255, 255)");
                 },
             },

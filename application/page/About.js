@@ -33,19 +33,11 @@ define(["app"], (App) => {
                                     "Respect the licenses of the apps, it would be nice if you use app more often to support the developer with a donation. Thanks!"
                                 ),
                                 h("div", {}, this.$t("Terms")),
-                                h(
-                                    "div",
-                                    {},
-                                    this.$t("Terms_see") + server_info.terms
-                                ),
+                                h("div", {}, this.$t("Terms_see") + server_info.terms),
                             ]
                         ),
                         h("div", { class: "UpdateTime flex-h center" }, [
-                            h(
-                                "div",
-                                {},
-                                this.$t("Update_time") + params.updateTime
-                            ),
+                            h("div", {}, this.$t("Update_time") + params.updateTime),
                         ]),
                     ]
                 );

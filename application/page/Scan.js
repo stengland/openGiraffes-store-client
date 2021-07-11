@@ -16,20 +16,16 @@ define(["app"], (App) => {
                         },
                     },
                     [
-                        h(
-                            "div",
-                            { class: "Content wh-100 flex-v", ref: "Content" },
-                            [
-                                h("video", {
-                                    class: "Video wh-100",
-                                    ref: "Video",
-                                }),
-                                h("div", { class: "corner-nw" }),
-                                h("div", { class: "corner-no" }),
-                                h("div", { class: "corner-so" }),
-                                h("div", { class: "corner-sw" }),
-                            ]
-                        ),
+                        h("div", { class: "Content wh-100 flex-v", ref: "Content" }, [
+                            h("video", {
+                                class: "Video wh-100",
+                                ref: "Video",
+                            }),
+                            h("div", { class: "corner-nw" }),
+                            h("div", { class: "corner-no" }),
+                            h("div", { class: "corner-so" }),
+                            h("div", { class: "corner-sw" }),
+                        ]),
                     ]
                 );
             },
@@ -74,9 +70,7 @@ define(["app"], (App) => {
                 },
                 startScan() {
                     navigator.getUserMedia =
-                        navigator.getUserMedia ||
-                        navigator.webkitGetUserMedia ||
-                        navigator.mozGetUserMedia;
+                        navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
                     if (navigator.getUserMedia) {
                         navigator.getUserMedia(
@@ -91,39 +85,19 @@ define(["app"], (App) => {
                                 video.onloadedmetadata = (e) => {
                                     video.play();
 
-                                    var barcodeCanvas = document.createElement(
-                                        "canvas"
-                                    );
+                                    var barcodeCanvas = document.createElement("canvas");
                                     let intv = setInterval(() => {
                                         barcodeCanvas.width = video.videoWidth;
-                                        barcodeCanvas.height =
-                                            video.videoHeight;
-                                        var barcodeContext = barcodeCanvas.getContext(
-                                            "2d"
-                                        );
+                                        barcodeCanvas.height = video.videoHeight;
+                                        var barcodeContext = barcodeCanvas.getContext("2d");
                                         var imageWidth = video.videoWidth,
                                             imageHeight = video.videoHeight;
-                                        barcodeContext.drawImage(
-                                            video,
-                                            0,
-                                            0,
-                                            imageWidth,
-                                            imageHeight
-                                        );
+                                        barcodeContext.drawImage(video, 0, 0, imageWidth, imageHeight);
 
-                                        var imageData = barcodeContext.getImageData(
-                                            0,
-                                            0,
-                                            imageWidth,
-                                            imageHeight
-                                        );
+                                        var imageData = barcodeContext.getImageData(0, 0, imageWidth, imageHeight);
                                         var idd = imageData.data;
 
-                                        let code = jsQR(
-                                            idd,
-                                            imageWidth,
-                                            imageHeight
-                                        );
+                                        let code = jsQR(idd, imageWidth, imageHeight);
 
                                         if (code) {
                                             this.stopScan(true);
@@ -133,9 +107,7 @@ define(["app"], (App) => {
                                 };
                             },
                             (err) => {
-                                console.log(
-                                    "The following error occurred: " + err.name
-                                );
+                                console.log("The following error occurred: " + err.name);
                             }
                         );
                     } else {
