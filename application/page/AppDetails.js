@@ -9,6 +9,7 @@ define(["app"], (App) => {
                     screenshots: null,
                     data: params.data,
                     depend_temp: [],
+                    locales_temp: [],
                     data1: {
                         name: "KaiAuth",
                         description: "Simple Google Authenticator alternative",
@@ -276,7 +277,7 @@ define(["app"], (App) => {
                                         },
                                         [
                                             this.$t("App_locale"),
-                                            this.data.locales.join(", "),
+                                            this.locales_temp.join(", "),
                                         ].join("：")
                                     ),
                                     h(
@@ -302,7 +303,14 @@ define(["app"], (App) => {
                     this.themeLight();
                     focusable.scrollEl = this.$refs.Content;
                     this.requestFocus();
-                    if (this.data.dependencies.length === 0) {
+                    if (!this.data.locales || this.data.locales.length === 0) {
+                        this.locales_temp = ["Unknown"];
+                    } else {
+                        this.data.locales.forEach((loc) => {
+                            this.locales_temp.push(loc);
+                        });
+                    }
+                    if (!this.data.dependencies || this.data.dependencies.length === 0) {
                         this.depend_temp = ["(None)"];
                     } else {
                         this.data.dependencies.forEach((depend) => {
