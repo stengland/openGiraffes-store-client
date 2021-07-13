@@ -6,8 +6,10 @@
     "scripts": {
         "formatting:test": "npx prettier --check .",
         "formatting:fix": "npx prettier --write .",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "package": "./build.sh"
+        "switch:bhackers": "./SwitchTo-bHackers.sh",
+        "switch:opengiraffes": "./SwitchTo-openGiraffes.sh",
+        "switch:bhackers:win": "./SwitchTo-bHackers.bat",
+        "switch:opengiraffes:win": "./SwitchTo-openGiraffes.bat"
     },
     "repository": {
         "type": "git",
