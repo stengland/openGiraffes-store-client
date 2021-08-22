@@ -1,768 +1,388 @@
-var __extends =
-    (this && this.__extends) ||
-    (function () {
-        var D = function (z, v) {
-            D =
-                Object.setPrototypeOf ||
-                ({ __proto__: [] } instanceof Array &&
-                    function (A, B) {
-                        A.__proto__ = B;
-                    }) ||
-                function (A, B) {
-                    for (var E in B) B.hasOwnProperty(E) && (A[E] = B[E]);
-                };
-            return D(z, v);
-        };
-        return function (z, v) {
-            function A() {
-                this.constructor = z;
+var __extends = this && this.__extends || function () {
+    var e = function (t, n) {
+        return (e = Object.setPrototypeOf || {
+                __proto__: []
             }
-            D(z, v);
-            z.prototype =
-                null === v
-                    ? Object.create(v)
-                    : ((A.prototype = v.prototype), new A());
-        };
-    })();
-
-const defineFocusable = function (z) {
-    Object.defineProperty(z, "__esModule", { value: !0 });
-    (function () {
-        if ("function" === typeof window.CustomEvent) return !1;
-        var r = function (l, a) {
-            a = a || { bubbles: !1, cancelable: !1, detail: void 0 };
-            var b = document.createEvent("CustomEvent");
-            b.initCustomEvent(l, a.bubbles, a.cancelable, a.detail);
-            return b;
-        };
-        r.prototype = window.Event.prototype;
-        window.CustomEvent = r;
-    })();
-    var v = {
+            instanceof Array && function (e, t) {
+                e.__proto__ = t
+            } || function (e, t) {
+                for (var n in t) t.hasOwnProperty(n) && (e[n] = t[n])
+            })(t, n)
+    };
+    return function (t, n) {
+        function o() {
+            this.constructor = t
+        }
+        e(t, n), t.prototype = null === n ? Object.create(n) : (o.prototype = n.prototype, new o)
+    }
+}();
+const defineFocusable = function (e) {
+    Object.defineProperty(e, "__esModule", {
+            value: !0
+        }),
+        function () {
+            if ("function" == typeof window.CustomEvent) return !1;
+            var e = function (e, t) {
+                t = t || {
+                    bubbles: !1,
+                    cancelable: !1,
+                    detail: void 0
+                };
+                var n = document.createEvent("CustomEvent");
+                return n.initCustomEvent(e, t.bubbles, t.cancelable, t.detail), n
+            };
+            e.prototype = window.Event.prototype, window.CustomEvent = e
+        }();
+    var t = {
             KEY_LEFT: [37, 21],
             KEY_UP: [38, 19],
             KEY_RIGHT: [39, 22],
             KEY_DOWN: [40, 20],
-            KEY_ENTER: [13, 23],
+            KEY_ENTER: [13, 23]
         },
-        A = { type: "left", event: new CustomEvent("left", { detail: {} }) },
-        B = { type: "right", event: new CustomEvent("right", { detail: {} }) },
-        E = { type: "up", event: new CustomEvent("up", { detail: {} }) },
-        J = { type: "down", event: new CustomEvent("down", { detail: {} }) },
-        G = 0,
-        H = null,
-        I = 0;
-    var D = (function (r) {
-        function l() {
-            var a = (null !== r && r.apply(this, arguments)) || this;
-            a.focusKeyUpEvent = function (b) {
-                var c = window.event ? window.event.keyCode : b.which,
-                    d = document.querySelectorAll("[focusable]");
-                if (d.length) {
-                    var f = document.querySelectorAll("[focused]");
-                    d = f.length ? f[f.length - 1] : d[0];
-                    -1 !== a._KEYS.KEY_ENTER.indexOf(c) &&
-                        (clearTimeout(H),
-                        0 === G && (a.preventDefault(b), d.click(), (G = 0)));
-                }
-                G = I = 0;
-            };
-            a.focusKeyDownEvent = function (b) {
-                var c = window.event ? window.event.keyCode : b.which,
-                    d = document.querySelectorAll("[focusable]");
-                if (d.length) {
-                    var f = document.querySelectorAll("[focused]"),
-                        h = f.length ? f[f.length - 1] : d[0];
-                    -1 !== a._KEYS.KEY_ENTER.indexOf(c)
-                        ? 0 === I &&
-                          ((I = 1),
-                          (H = setTimeout(function () {
-                              G++;
-                              h.dispatchEvent(
-                                  new CustomEvent("longPress", {
-                                      detail: { el: h },
-                                  })
-                              );
-                              clearTimeout(H);
-                          }, a._longPressTime)))
-                        : -1 !== a._KEYS.KEY_LEFT.indexOf(c)
-                        ? (a.preventDefault(b), a.keyEvent(A, h))
-                        : -1 !== a._KEYS.KEY_UP.indexOf(c)
-                        ? (a.preventDefault(b), a.keyEvent(E, h))
-                        : -1 !== a._KEYS.KEY_DOWN.indexOf(c)
-                        ? (a.preventDefault(b), a.keyEvent(J, h))
-                        : -1 !== a._KEYS.KEY_RIGHT.indexOf(c) &&
-                          (a.preventDefault(b), a.keyEvent(B, h));
-                }
-            };
-            a.init = function (b) {
-                a._focusClassName = b.focusClassName || a._focusClassName;
-                a._initDis = b.initDis || a._initDis;
-                a._findFocusType =
-                    void 0 === b.findFocusType
-                        ? a._findFocusType
-                        : b.findFocusType;
-                a._KEYS.KEY_UP = (b.KEYS && b.KEYS.KEY_UP) || a._KEYS.KEY_UP;
-                a._KEYS.KEY_RIGHT =
-                    (b.KEYS && b.KEYS.KEY_RIGHT) || a._KEYS.KEY_RIGHT;
-                a._KEYS.KEY_DOWN =
-                    (b.KEYS && b.KEYS.KEY_DOWN) || a._KEYS.KEY_DOWN;
-                a._KEYS.KEY_LEFT =
-                    (b.KEYS && b.KEYS.KEY_LEFT) || a._KEYS.KEY_LEFT;
-                a._KEYS.KEY_ENTER =
-                    (b.KEYS && b.KEYS.KEY_ENTER) || a._KEYS.KEY_ENTER;
-                a._offsetDistance =
-                    void 0 === b.offsetDistance
-                        ? a._offsetDistance
-                        : b.offsetDistance;
-                a._longPressTime =
-                    void 0 === b.longPressTime
-                        ? a._longPressTime
-                        : b.longPressTime;
-                a._distanceToCenter =
-                    void 0 === b.distanceToCenter
-                        ? a._distanceToCenter
-                        : b.distanceToCenter;
-            };
-            a.requestFocus = function (b, c) {
-                void 0 === c && (c = !0);
-                a.eventDisabled = a.eventDisabled ? "eventSkip" : "initSkip";
-                b = (b && b.length && b[0]) || b;
-                if (!b) throw Error("Element not found!");
-                b = b.$el || b;
-                if (null !== b.getAttribute("focused")) return !1;
-                for (
-                    var d = document.getElementsByClassName(a._focusClassName),
-                        f = 0;
-                    f < d.length;
-                    f++
-                )
-                    a.removeOneClassName(d[f], a._focusClassName);
-                a.addAttrName(b, "focused");
-                "initSkip" === a.eventDisabled
-                    ? c
-                        ? a.doScroll(b, c)
-                        : setTimeout(function () {
-                              a.doScroll(b, c);
-                          }, 100)
-                    : a.doScroll(b, c);
-            };
-            a.getElementByPath = a.getElementByPath;
-            a.reset = function () {
-                a._KEYS = v;
-                a._scrollEl = null;
-                a._focusClassName = "focus";
-                a._initDis = 20;
-                a._findFocusType = 1;
-                a._offsetDistance = 50;
-                a._longPressTime = 500;
-                a._distanceToCenter = !1;
-                a._limitingEl = null;
-            };
-            a.resetFocusClassName = function () {
-                a._focusClassName = "focus";
-            };
-            a.resetInitDis = function () {
-                a._initDis = 20;
-            };
-            a.resetFindFocusType = function () {
-                a._findFocusType = 1;
-            };
-            a.resetKEYS = function () {
-                a._KEYS = v;
-            };
-            a.resetTheDis = function () {
-                a._offsetDistance = 50;
-            };
-            a.resetOffsetDistance = function () {
-                a._offsetDistance = 50;
-            };
-            a.resetLongPressTime = function () {
-                a._longPressTime = 500;
-            };
-            a.resetDistanceToCenter = function () {
-                a._distanceToCenter = !1;
-            };
-            a.resetLimitingEl = function () {
-                a._limitingEl = null;
-            };
-            a.resetScrollEl = function () {
-                a._scrollEl = null;
-            };
-            a.setScrollEl = function (b) {
-                a._scrollEl = b || a._scrollEl;
-            };
-            return a;
-        }
-        __extends(l, r);
-        Object.defineProperty(l.prototype, "focusClassName", {
-            get: function () {
-                return this._focusClassName;
-            },
-            set: function (a) {
-                this._focusClassName = a;
-            },
-            enumerable: !0,
-            configurable: !0,
-        });
-        Object.defineProperty(l.prototype, "initDis", {
-            get: function () {
-                return this._initDis;
-            },
-            set: function (a) {
-                this._initDis = a;
-            },
-            enumerable: !0,
-            configurable: !0,
-        });
-        Object.defineProperty(l.prototype, "findFocusType", {
-            get: function () {
-                return this._findFocusType;
-            },
-            set: function (a) {
-                this._findFocusType = a;
-            },
-            enumerable: !0,
-            configurable: !0,
-        });
-        Object.defineProperty(l.prototype, "KEYS", {
-            get: function () {
-                return this._KEYS;
-            },
-            set: function (a) {
-                this._KEYS = a;
-            },
-            enumerable: !0,
-            configurable: !0,
-        });
-        Object.defineProperty(l.prototype, "offsetDistance", {
-            get: function () {
-                return this._offsetDistance;
-            },
-            set: function (a) {
-                this._offsetDistance = a;
-            },
-            enumerable: !0,
-            configurable: !0,
-        });
-        Object.defineProperty(l.prototype, "longPressTime", {
-            get: function () {
-                return this._longPressTime;
-            },
-            set: function (a) {
-                this._longPressTime = a;
-            },
-            enumerable: !0,
-            configurable: !0,
-        });
-        Object.defineProperty(l.prototype, "distanceToCenter", {
-            get: function () {
-                return this._distanceToCenter;
-            },
-            set: function (a) {
-                this._distanceToCenter = a;
-            },
-            enumerable: !0,
-            configurable: !0,
-        });
-        Object.defineProperty(l.prototype, "limitingEl", {
-            get: function () {
-                return this._limitingEl;
-            },
-            set: function (a) {
-                null !== a
-                    ? (document
-                          .querySelectorAll("[focusable]")
-                          .forEach(function (b) {
-                              b.setAttribute("focusdisable", "");
-                              b.removeAttribute("focusable");
-                          }),
-                      a
-                          .querySelectorAll("[focusdisable]")
-                          .forEach(function (b) {
-                              b.setAttribute("focusable", "");
-                              b.removeAttribute("focusdisable");
-                          }))
-                    : (document
-                          .querySelectorAll("[focusable]")
-                          .forEach(function (b) {
-                              b.removeAttribute("focusdisable");
-                          }),
-                      document
-                          .querySelectorAll("[focusdisable]")
-                          .forEach(function (b) {
-                              b.setAttribute("focusable", "");
-                              b.removeAttribute("focusdisable");
-                          }));
-                this._limitingEl = a;
-            },
-            enumerable: !0,
-            configurable: !0,
-        });
-        Object.defineProperty(l.prototype, "scrollEl", {
-            get: function () {
-                return this._scrollEl;
-            },
-            set: function (a) {
-                this._scrollEl = a;
-            },
-            enumerable: !0,
-            configurable: !0,
-        });
-        return l;
-    })(
-        (function (r) {
-            function l() {
-                var a = (null !== r && r.apply(this, arguments)) || this;
-                a.keyEvent = function (b, c) {
-                    a.eventDisabled = "event";
-                    c.dispatchEvent(b.event);
-                    c.dispatchEvent(
-                        new CustomEvent("onBlur", { detail: { el: c } })
-                    );
-                    "eventSkip" === a.eventDisabled
-                        ? (a.eventDisabled = "")
-                        : a.setFocus(b.type);
-                };
-                a.setFocus = function (b) {
-                    var c = a.getNextFocusElement(b);
-                    document.querySelector("focused");
-                    null !== c &&
-                        "none" !== window.getComputedStyle(c).display &&
-                        a.parentShow(c) &&
-                        null === c.getAttribute("focusdisable") &&
-                        (c && a.addAttrName(c, "focused"),
-                        a.doScroll(c, !0, b));
-                };
-                a.scrollFn = function (b, c, d, scrollEl) {
-                    void 0 === d && (d = !0);
-                    a.Scroll2({
-                        number: b,
-                        time: d ? 200 : 0,
+        n = {
+            type: "left",
+            event: new CustomEvent("left", {
+                detail: {}
+            })
+        },
+        o = {
+            type: "right",
+            event: new CustomEvent("right", {
+                detail: {}
+            })
+        },
+        l = {
+            type: "up",
+            event: new CustomEvent("up", {
+                detail: {}
+            })
+        },
+        i = {
+            type: "down",
+            event: new CustomEvent("down", {
+                detail: {}
+            })
+        },
+        s = 0,
+        r = null,
+        u = 0,
+        c = function (e) {
+            function c() {
+                var c = null !== e && e.apply(this, arguments) || this;
+                return c.focusKeyUpEvent = function (e) {
+                    var t = window.event ? window.event.keyCode : e.which,
+                        n = document.querySelectorAll("[focusable]");
+                    if (n.length) {
+                        var o = document.querySelectorAll("[focused]");
+                        n = o.length ? o[o.length - 1] : n[0], -1 !== c._KEYS.KEY_ENTER.indexOf(t) && (clearTimeout(r), 0 === s && (c.preventDefault(e), n.click(), s = 0))
+                    }
+                    s = u = 0
+                }, c.focusKeyDownEvent = function (e) {
+                    var t = window.event ? window.event.keyCode : e.which,
+                        f = document.querySelectorAll("[focusable]");
+                    if (f.length) {
+                        var a = document.querySelectorAll("[focused]"),
+                            d = a.length ? a[a.length - 1] : f[0]; - 1 !== c._KEYS.KEY_ENTER.indexOf(t) ? 0 === u && (u = 1, r = setTimeout((function () {
+                            s++, d.dispatchEvent(new CustomEvent("longPress", {
+                                detail: {
+                                    el: d
+                                }
+                            })), clearTimeout(r)
+                        }), c._longPressTime)) : -1 !== c._KEYS.KEY_LEFT.indexOf(t) ? (c.preventDefault(e), c.keyEvent(n, d)) : -1 !== c._KEYS.KEY_UP.indexOf(t) ? (c.preventDefault(e), c.keyEvent(l, d)) : -1 !== c._KEYS.KEY_DOWN.indexOf(t) ? (c.preventDefault(e), c.keyEvent(i, d)) : -1 !== c._KEYS.KEY_RIGHT.indexOf(t) && (c.preventDefault(e), c.keyEvent(o, d))
+                    }
+                }, c.init = function (e) {
+                    c._focusClassName = e.focusClassName || c._focusClassName, c._initDis = e.initDis || c._initDis, c._findFocusType = void 0 === e.findFocusType ? c._findFocusType : e.findFocusType, c._KEYS.KEY_UP = e.KEYS && e.KEYS.KEY_UP || c._KEYS.KEY_UP, c._KEYS.KEY_RIGHT = e.KEYS && e.KEYS.KEY_RIGHT || c._KEYS.KEY_RIGHT, c._KEYS.KEY_DOWN = e.KEYS && e.KEYS.KEY_DOWN || c._KEYS.KEY_DOWN, c._KEYS.KEY_LEFT = e.KEYS && e.KEYS.KEY_LEFT || c._KEYS.KEY_LEFT, c._KEYS.KEY_ENTER = e.KEYS && e.KEYS.KEY_ENTER || c._KEYS.KEY_ENTER, c._offsetDistance = void 0 === e.offsetDistance ? c._offsetDistance : e.offsetDistance, c._longPressTime = void 0 === e.longPressTime ? c._longPressTime : e.longPressTime, c._distanceToCenter = void 0 === e.distanceToCenter ? c._distanceToCenter : e.distanceToCenter
+                }, c.requestFocus = function (e, t) {
+                    if (void 0 === t && (t = !0), c.eventDisabled = c.eventDisabled ? "eventSkip" : "initSkip", !(e = e && e.length && e[0] || e)) throw Error("Element not found!");
+                    if (null !== (e = e.$el || e).getAttribute("focused")) return !1;
+                    for (var n = document.getElementsByClassName(c._focusClassName), o = 0; o < n.length; o++) c.removeOneClassName(n[o], c._focusClassName);
+                    c.addAttrName(e, "focused"), "initSkip" === c.eventDisabled ? t ? c.doScroll(e, t) : setTimeout((function () {
+                        c.doScroll(e, t)
+                    }), 100) : c.doScroll(e, t)
+                }, c.getElementByPath = c.getElementByPath, c.reset = function () {
+                    c._KEYS = t, c._scrollEl = null, c._focusClassName = "focus", c._initDis = 20, c._findFocusType = 1, c._offsetDistance = 50, c._longPressTime = 500, c._distanceToCenter = !1, c._limitingEl = null
+                }, c.resetFocusClassName = function () {
+                    c._focusClassName = "focus"
+                }, c.resetInitDis = function () {
+                    c._initDis = 20
+                }, c.resetFindFocusType = function () {
+                    c._findFocusType = 1
+                }, c.resetKEYS = function () {
+                    c._KEYS = t
+                }, c.resetTheDis = function () {
+                    c._offsetDistance = 50
+                }, c.resetOffsetDistance = function () {
+                    c._offsetDistance = 50
+                }, c.resetLongPressTime = function () {
+                    c._longPressTime = 500
+                }, c.resetDistanceToCenter = function () {
+                    c._distanceToCenter = !1
+                }, c.resetLimitingEl = function () {
+                    c._limitingEl = null
+                }, c.resetScrollEl = function () {
+                    c._scrollEl = null
+                }, c.setScrollEl = function (e) {
+                    c._scrollEl = e || c._scrollEl
+                }, c
+            }
+            return __extends(c, e), Object.defineProperty(c.prototype, "focusClassName", {
+                get: function () {
+                    return this._focusClassName
+                },
+                set: function (e) {
+                    this._focusClassName = e
+                },
+                enumerable: !0,
+                configurable: !0
+            }), Object.defineProperty(c.prototype, "initDis", {
+                get: function () {
+                    return this._initDis
+                },
+                set: function (e) {
+                    this._initDis = e
+                },
+                enumerable: !0,
+                configurable: !0
+            }), Object.defineProperty(c.prototype, "findFocusType", {
+                get: function () {
+                    return this._findFocusType
+                },
+                set: function (e) {
+                    this._findFocusType = e
+                },
+                enumerable: !0,
+                configurable: !0
+            }), Object.defineProperty(c.prototype, "KEYS", {
+                get: function () {
+                    return this._KEYS
+                },
+                set: function (e) {
+                    this._KEYS = e
+                },
+                enumerable: !0,
+                configurable: !0
+            }), Object.defineProperty(c.prototype, "offsetDistance", {
+                get: function () {
+                    return this._offsetDistance
+                },
+                set: function (e) {
+                    this._offsetDistance = e
+                },
+                enumerable: !0,
+                configurable: !0
+            }), Object.defineProperty(c.prototype, "longPressTime", {
+                get: function () {
+                    return this._longPressTime
+                },
+                set: function (e) {
+                    this._longPressTime = e
+                },
+                enumerable: !0,
+                configurable: !0
+            }), Object.defineProperty(c.prototype, "distanceToCenter", {
+                get: function () {
+                    return this._distanceToCenter
+                },
+                set: function (e) {
+                    this._distanceToCenter = e
+                },
+                enumerable: !0,
+                configurable: !0
+            }), Object.defineProperty(c.prototype, "limitingEl", {
+                get: function () {
+                    return this._limitingEl
+                },
+                set: function (e) {
+                    null !== e ? (Array.from(document.querySelectorAll("[focusable]")).forEach((function (e) {
+                        e.setAttribute("focusdisable", ""), e.removeAttribute("focusable")
+                    })), Array.from(e.querySelectorAll("[focusdisable]")).forEach((function (e) {
+                        e.setAttribute("focusable", ""), e.removeAttribute("focusdisable")
+                    }))) : (Array.from(document.querySelectorAll("[focusable]")).forEach((function (e) {
+                        e.removeAttribute("focusdisable")
+                    })), Array.from(document.querySelectorAll("[focusdisable]")).forEach((function (e) {
+                        e.setAttribute("focusable", ""), e.removeAttribute("focusdisable")
+                    }))), this._limitingEl = e
+                },
+                enumerable: !0,
+                configurable: !0
+            }), Object.defineProperty(c.prototype, "scrollEl", {
+                get: function () {
+                    return this._scrollEl
+                },
+                set: function (e) {
+                    this._scrollEl = e
+                },
+                enumerable: !0,
+                configurable: !0
+            }), c
+        }(function (e) {
+            function t() {
+                var t = null !== e && e.apply(this, arguments) || this;
+                return t.keyEvent = function (e, n) {
+                    t.eventDisabled = "event", n.dispatchEvent(e.event), n.dispatchEvent(new CustomEvent("onBlur", {
+                        detail: {
+                            el: n
+                        }
+                    })), "eventSkip" === t.eventDisabled ? t.eventDisabled = "" : t.setFocus(e.type)
+                }, t.setFocus = function (e) {
+                    var n = t.getNextFocusElement(e);
+                    document.querySelector("focused"), null !== n && "none" !== window.getComputedStyle(n).display && t.parentShow(n) && null === n.getAttribute("focusdisable") && (n && t.addAttrName(n, "focused"), t.doScroll(n, !0, e))
+                }, t.scrollFn = function (e, n, o, l) {
+                    void 0 === o && (o = !0), t.Scroll2({
+                        number: e,
+                        time: o ? 200 : 0,
                         getNumFn: function () {
-                            if ("scrollTop" === c)
-                                return scrollEl
-                                    ? scrollEl.scrollTop
-                                    : document.body.scrollTop ||
-                                          document.documentElement.scrollTop ||
-                                          window.pageYOffset;
-                            if ("scrollLeft" === c)
-                                return scrollEl
-                                    ? scrollEl.scrollLeft
-                                    : document.body.scrollLeft ||
-                                          document.documentElement.scrollLeft ||
-                                          window.pageXOffset;
+                            return "scrollTop" === n ? l ? l.scrollTop : document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset : "scrollLeft" === n ? l ? l.scrollLeft : document.body.scrollLeft || document.documentElement.scrollLeft || window.pageXOffset : void 0
                         },
-                        setNumFn: function (f) {
-                            "scrollTop" === c &&
-                                (scrollEl
-                                    ? (scrollEl.scrollTop = f)
-                                    : (document.body.scrollTop = document.documentElement.scrollTop = f));
-                            "scrollLeft" === c &&
-                                (scrollEl
-                                    ? (scrollEl.scrollLeft = f)
-                                    : (document.body.scrollLeft = document.documentElement.scrollLeft = f));
-                        },
-                    });
-                };
-                a.doScroll = function (b, c, d) {
-                    let scrollEl = a._scrollEl;
-                    if (d == "left" || d == "right") {
-                        let el = b.parentElement;
-                        if (el.classList.contains("scroll-x")) {
-                            scrollEl = el;
+                        setNumFn: function (e) {
+                            "scrollTop" === n && (l ? l.scrollTop = e : document.body.scrollTop = document.documentElement.scrollTop = e), "scrollLeft" === n && (l ? l.scrollLeft = e : document.body.scrollLeft = document.documentElement.scrollLeft = e)
                         }
-                    } else if (d == "up" || d == "down") {
-                        let el = b.parentElement;
-                        if (el.classList.contains("scroll-y")) {
-                            scrollEl = el;
-                        }
+                    })
+                }, t.doScroll = function (e, n, o) {
+                    let l = t._scrollEl;
+                    if ("left" == o || "right" == o) {
+                        let t = e.parentElement;
+                        t.classList.contains("scroll-x") && (l = t)
+                    } else if ("up" == o || "down" == o) {
+                        let t = e.parentElement;
+                        t.classList.contains("scroll-y") && (l = t)
                     }
-                    // console.log(scrollEl);
-                    void 0 === c && (c = !0);
-                    b = (b && b.length && b[0]) || b;
-                    if ((!scrollEl || a.inNode(b, scrollEl)) && b) {
-                        b = b.getBoundingClientRect();
-                        if (scrollEl) {
-                            var f = scrollEl.scrollTop;
-                            var h = scrollEl.scrollLeft;
-                            var k = scrollEl.getBoundingClientRect();
-                            var w = k.height;
-                            var g = k.width;
-                            var p = b.left - k.left;
-                            k = b.top - k.top;
-                        } else
-                            (f =
-                                document.body.scrollTop ||
-                                document.documentElement.scrollTop ||
-                                window.pageXOffset),
-                                (h =
-                                    document.body.scrollLeft ||
-                                    document.documentElement.scrollLeft ||
-                                    window.pageYOffset),
-                                (g =
-                                    document.documentElement.clientWidth ||
-                                    document.body.clientWidth),
-                                (w =
-                                    document.documentElement.clientHeight ||
-                                    document.body.clientHeight),
-                                (p = b.left),
-                                (k = b.top);
-                        var m = g / 2,
-                            u = w / 2,
-                            x = p + b.width / 2,
-                            y = k + b.height / 2;
-                        a._distanceToCenter
-                            ? "down" === d || "up" === d
-                                ? a.scrollFn(
-                                      y + f - u,
-                                      "scrollTop",
-                                      c,
-                                      scrollEl
-                                  )
-                                : "left" === d || "right" === d
-                                ? a.scrollFn(
-                                      x + h - m,
-                                      "scrollLeft",
-                                      c,
-                                      scrollEl
-                                  )
-                                : b.top > b.left
-                                ? (a.scrollFn(
-                                      x + h - m,
-                                      "scrollLeft",
-                                      c,
-                                      scrollEl
-                                  ),
-                                  a.scrollFn(
-                                      y + f - u,
-                                      "scrollTop",
-                                      c,
-                                      scrollEl
-                                  ))
-                                : (a.scrollFn(
-                                      y + f - u,
-                                      "scrollTop",
-                                      c,
-                                      scrollEl
-                                  ),
-                                  a.scrollFn(
-                                      x + h - m,
-                                      "scrollLeft",
-                                      c,
-                                      scrollEl
-                                  ))
-                            : ((d = k + b.height),
-                              d > w &&
-                                  ((d = d - w + f + a._offsetDistance),
-                                  a.scrollFn(d, "scrollTop", c, scrollEl)),
-                              0 > k &&
-                                  ((d = k + f - a._offsetDistance),
-                                  a.scrollFn(d, "scrollTop", c, scrollEl)),
-                              (d = p + b.width),
-                              d > g &&
-                                  ((d = d - g + h + a._offsetDistance),
-                                  a.scrollFn(d, "scrollLeft", c, scrollEl)),
-                              0 > p &&
-                                  ((d = p + h - a._offsetDistance),
-                                  a.scrollFn(d, "scrollLeft", c, scrollEl)));
+                    if (void 0 === n && (n = !0), e = e && e.length && e[0] || e, (!l || t.inNode(e, l)) && e) {
+                        if (e = e.getBoundingClientRect(), l) {
+                            var i = l.scrollTop,
+                                s = l.scrollLeft,
+                                r = l.getBoundingClientRect(),
+                                u = r.height,
+                                c = r.width,
+                                f = e.left - r.left;
+                            r = e.top - r.top
+                        } else i = document.body.scrollTop || document.documentElement.scrollTop || window.pageXOffset, s = document.body.scrollLeft || document.documentElement.scrollLeft || window.pageYOffset, c = document.documentElement.clientWidth || document.body.clientWidth, u = document.documentElement.clientHeight || document.body.clientHeight, f = e.left, r = e.top;
+                        var a = c / 2,
+                            d = u / 2,
+                            m = f + e.width / 2,
+                            E = r + e.height / 2;
+                        t._distanceToCenter ? "down" === o || "up" === o ? t.scrollFn(E + i - d, "scrollTop", n, l) : "left" === o || "right" === o ? t.scrollFn(m + s - a, "scrollLeft", n, l) : e.top > e.left ? (t.scrollFn(m + s - a, "scrollLeft", n, l), t.scrollFn(E + i - d, "scrollTop", n, l)) : (t.scrollFn(E + i - d, "scrollTop", n, l), t.scrollFn(m + s - a, "scrollLeft", n, l)) : ((o = r + e.height) > u && (o = o - u + i + t._offsetDistance, t.scrollFn(o, "scrollTop", n, l)), 0 > r && (o = r + i - t._offsetDistance, t.scrollFn(o, "scrollTop", n, l)), (o = f + e.width) > c && (o = o - c + s + t._offsetDistance, t.scrollFn(o, "scrollLeft", n, l)), 0 > f && (o = f + s - t._offsetDistance, t.scrollFn(o, "scrollLeft", n, l)))
                     }
-                };
-                a.calLineEl = function (b, c, d, f, h, k, w) {
-                    if (1 === k) return !1;
-                    k = 0;
-                    if ("up" === b || "down" === b) k = c;
-                    else if ("right" === b || "left" === b) k = d;
-                    k <= w &&
-                        ((b = Math.min(c + d, f.dis)),
-                        b != f.dis && ((f.dis = b), (f.el = h)));
-                    return f;
-                };
-                a.getNextFocusElement = function (b) {
-                    var c = document.querySelectorAll("[focusable]"),
-                        d = document.querySelectorAll("[focused]");
-                    if (!c || !c.length) return null;
-                    var f = null,
-                        h = Number.MAX_VALUE,
-                        k = Number.MAX_VALUE,
-                        w = {
+                }, t.calLineEl = function (e, t, n, o, l, i, s) {
+                    return 1 !== i && (i = 0, "up" === e || "down" === e ? i = t : "right" !== e && "left" !== e || (i = n), i <= s && ((e = Math.min(t + n, o.dis)) != o.dis && (o.dis = e, o.el = l)), o)
+                }, t.getNextFocusElement = function (e) {
+                    var n = document.querySelectorAll("[focusable]"),
+                        o = document.querySelectorAll("[focused]");
+                    if (!n || !n.length) return null;
+                    var l = null,
+                        i = Number.MAX_VALUE,
+                        s = Number.MAX_VALUE,
+                        r = {
                             el: null,
                             dis: Number.MAX_VALUE,
-                            absDis: Number.MAX_VALUE,
+                            absDis: Number.MAX_VALUE
                         };
-                    if (d.length) d = d[d.length - 1];
-                    else return (d = c[0]), a.addAttrName(d, "focused"), d;
-                    var g = d.getBoundingClientRect(),
-                        p = (g.width - d.offsetWidth) / 2,
-                        m = (g.height - d.offsetHeight) / 2,
-                        u = (d = 0),
-                        x = 0,
-                        y = 0,
-                        t = [g.top + m, g.right - p, g.bottom - m, g.left + p];
-                    "up" === b &&
-                        ((d = g.left + g.width / 2),
-                        (u = Math.round(g.bottom - m)),
-                        (x = g.left + p),
-                        (y = g.left + g.width - p));
-                    "right" === b &&
-                        ((u = g.top + g.height / 2),
-                        (d = Math.round(g.left + p)),
-                        (x = g.top + m),
-                        (y = g.top + g.height - m));
-                    "down" === b &&
-                        ((d = g.left + g.width / 2),
-                        (u = Math.round(g.top + m)),
-                        (x = g.left + p),
-                        (y = g.left + g.width - p));
-                    "left" === b &&
-                        ((u = g.top + g.height / 2),
-                        (d = Math.round(g.right - p)),
-                        (x = g.top + m),
-                        (y = g.top + g.height - m));
-                    g = !1;
-                    for (p = 0; p < c.length; p++) {
-                        m = c[p];
-                        var e = m.getBoundingClientRect(),
-                            C = 0,
-                            q = 0,
-                            n = 0,
-                            F = 0;
-                        if (
-                            document.querySelector("." + a._focusClassName) !==
-                            m
-                        ) {
-                            if ("up" === b) {
-                                q = e.top + e.height;
-                                if (
-                                    (e.right < t[3] || e.left > t[1]) &&
-                                    e.bottom > t[0]
-                                )
-                                    continue;
-                                if (Math.round(q) >= u) continue;
-                                C = e.left + e.width / 2;
-                                n = e.left;
-                                F = e.left + e.width;
-                            } else if ("right" === b) {
-                                C = e.left;
-                                if (
-                                    (e.bottom < t[0] || e.top > t[2]) &&
-                                    e.left < t[1]
-                                )
-                                    continue;
-                                if (Math.round(C) <= d) continue;
-                                q = e.top + e.height / 2;
-                                n = e.top;
-                                F = e.top + e.height;
-                            } else if ("down" === b) {
-                                q = e.top;
-                                if (
-                                    (e.right < t[3] || e.left > t[1]) &&
-                                    e.top < t[2]
-                                )
-                                    continue;
-                                if (Math.round(q) <= u) continue;
-                                C = e.left + e.width / 2;
-                                n = e.left;
-                                F = e.left + e.width;
-                            } else if ("left" === b) {
-                                C = e.left + e.width;
-                                if (
-                                    (e.bottom < t[0] || e.top > t[2]) &&
-                                    e.right > t[3]
-                                )
-                                    continue;
-                                if (Math.round(C) >= d) continue;
-                                q = e.top + e.height / 2;
-                                n = e.top;
-                                F = e.top + e.height;
+                    if (!o.length) return o = n[0], t.addAttrName(o, "focused"), o;
+                    var u = (o = o[o.length - 1]).getBoundingClientRect(),
+                        c = (u.width - o.offsetWidth) / 2,
+                        f = (u.height - o.offsetHeight) / 2,
+                        a = o = 0,
+                        d = 0,
+                        m = 0,
+                        E = [u.top + f, u.right - c, u.bottom - f, u.left + c];
+                    for ("up" === e && (o = u.left + u.width / 2, a = Math.round(u.bottom - f), d = u.left + c, m = u.left + u.width - c), "right" === e && (a = u.top + u.height / 2, o = Math.round(u.left + c), d = u.top + f, m = u.top + u.height - f), "down" === e && (o = u.left + u.width / 2, a = Math.round(u.top + f), d = u.left + c, m = u.left + u.width - c), "left" === e && (a = u.top + u.height / 2, o = Math.round(u.right - c), d = u.top + f, m = u.top + u.height - f), u = !1, c = 0; c < n.length; c++) {
+                        var h = (f = n[c]).getBoundingClientRect(),
+                            p = 0,
+                            _ = 0,
+                            g = 0,
+                            v = 0;
+                        if (document.querySelector("." + t._focusClassName) !== f) {
+                            if ("up" === e) {
+                                if (_ = h.top + h.height, (h.right < E[3] || h.left > E[1]) && h.bottom > E[0]) continue;
+                                if (Math.round(_) >= a) continue;
+                                p = h.left + h.width / 2, g = h.left, v = h.left + h.width
+                            } else if ("right" === e) {
+                                if (p = h.left, (h.bottom < E[0] || h.top > E[2]) && h.left < E[1]) continue;
+                                if (Math.round(p) <= o) continue;
+                                _ = h.top + h.height / 2, g = h.top, v = h.top + h.height
+                            } else if ("down" === e) {
+                                if (_ = h.top, (h.right < E[3] || h.left > E[1]) && h.top < E[2]) continue;
+                                if (Math.round(_) <= a) continue;
+                                p = h.left + h.width / 2, g = h.left, v = h.left + h.width
+                            } else if ("left" === e) {
+                                if (p = h.left + h.width, (h.bottom < E[0] || h.top > E[2]) && h.right > E[3]) continue;
+                                if (Math.round(p) >= o) continue;
+                                _ = h.top + h.height / 2, g = h.top, v = h.top + h.height
                             }
-                            e = Math.abs(d - C);
-                            q = Math.abs(u - q);
-                            a.calLineEl(
-                                b,
-                                e,
-                                q,
-                                w,
-                                m,
-                                a._findFocusType,
-                                a._initDis
-                            );
-                            if (x <= F && y >= n) {
-                                g = !0;
-                                n = 0;
-                                if ("up" === b || "down" === b) n = q;
-                                else if ("right" === b || "left" === b) n = e;
-                                k === n
-                                    ? ((n = Math.min(
-                                          Math.sqrt(e * e + q * q),
-                                          h
-                                      )),
-                                      n != h && ((h = n), (f = m)))
-                                    : ((n = Math.min(k, n)),
-                                      n != k &&
-                                          ((k = n),
-                                          (h = Math.min(
-                                              Math.sqrt(e * e + q * q),
-                                              h
-                                          )),
-                                          (f = m)));
-                            } else
-                                g ||
-                                    ((n = Math.min(
-                                        Math.sqrt(e * e + q * q),
-                                        h
-                                    )),
-                                    n != h && ((h = n), (f = m)));
+                            h = Math.abs(o - p), _ = Math.abs(a - _), t.calLineEl(e, h, _, r, f, t._findFocusType, t._initDis), d <= v && m >= g ? (u = !0, g = 0, "up" === e || "down" === e ? g = _ : "right" !== e && "left" !== e || (g = h), s === g ? (g = Math.min(Math.sqrt(h * h + _ * _), i)) != i && (i = g, l = f) : (g = Math.min(s, g)) != s && (s = g, i = Math.min(Math.sqrt(h * h + _ * _), i), l = f)) : u || (g = Math.min(Math.sqrt(h * h + _ * _), i)) != i && (i = g, l = f)
                         }
                     }
-                    return 1 === a._findFocusType ? f : w.el || f;
-                };
-                return a;
+                    return 1 === t._findFocusType ? l : r.el || l
+                }, t
             }
-            __extends(l, r);
-            return l;
-        })(
-            (function (r) {
-                function l() {
-                    var a = (null !== r && r.apply(this, arguments)) || this;
-                    a.hasClass = function (b, c) {
-                        return b.classList.contains(c);
-                    };
-                    a.toggleClass = function (b, c) {
-                        return b.classList.toggle(c);
-                    };
-                    a.getParentTag = function (b, c) {
-                        void 0 === c && (c = []);
-                        return b instanceof HTMLElement
-                            ? "BODY" !== b.parentElement.nodeName
-                                ? (c.push(b.parentElement),
-                                  a.getParentTag(b.parentElement, c))
-                                : c
-                            : console.error("receive only HTMLElement");
-                    };
-                    a.parentShow = function (b) {
-                        return 0 ===
-                            a.getParentTag(b).filter(function (c) {
-                                return (
-                                    "none" ===
-                                    window.getComputedStyle(c).display
-                                );
-                            }).length
-                            ? !0
-                            : !1;
-                    };
-                    a.removeOneClassName = function (b, c) {
-                        b && a.hasClass(b, c) && a.toggleClass(b, c);
-                    };
-                    a.getElementByPath = function (b) {
-                        return document.evaluate(b, document).iterateNext();
-                    };
-                    a.getElementsByPath = function (b) {
-                        b = document.evaluate(
-                            b,
-                            document,
-                            null,
-                            XPathResult.ANY_TYPE,
-                            null
-                        );
-                        var c = [],
-                            d = b.iterateNext();
-                        for (d && c.push(d); d; )
-                            (d = b.iterateNext()) && c.push(d);
-                        return c;
-                    };
-                    a.addClassName = function (b, c) {
-                        b && a.toggleClass(b, c);
-                    };
-                    a.addAttrName = function (b, c) {
-                        a.focusOriginalEl !== b &&
-                            ((a.focusOriginalSize = b.getBoundingClientRect()),
-                            (a.focusOriginalEl = b));
-                        var d = document.querySelector("[focused]");
-                        d &&
-                            (d.removeAttribute(c),
-                            a.removeOneClassName(d, a._focusClassName));
-                        b.setAttribute(c, "");
-                        "focused" === c &&
-                            (a.addClassName(b, a._focusClassName),
-                            b.dispatchEvent(
-                                new CustomEvent("onFocus", {
-                                    detail: { el: b },
-                                })
-                            ));
-                    };
-                    a.inNode = function (b, c) {
-                        return c !== b && c.contains(b);
-                    };
-                    a.preventDefault = function (b) {
-                        b = b || window.event;
-                        b.preventDefault && b.preventDefault();
-                        b.returnValue = !1;
-                    };
-                    a.onEvent = function (b, c, d) {
-                        return b.dispatchEvent(
-                            new CustomEvent(c, { detail: d })
-                        );
-                    };
-                    a.offEvent = function (b, c, d, f) {
-                        void 0 === f && (f = !1);
-                        return b.removeEventListener(c, d, f);
-                    };
-                    return a;
-                }
-                __extends(l, r);
-                l.prototype.Scroll2 = function (a) {
-                    var b = this;
-                    if (!a.time)
-                        return a.setNumFn && a.setNumFn(a.number), a.number;
-                    null != this.scrollTimer &&
-                        (clearInterval(this.scrollTimer),
-                        this.lastOpt.setNumFn &&
-                            this.lastOpt.setNumFn(this.lastOpt.number));
-                    this.lastOpt = a;
-                    var c = a.time / 20,
-                        d = 0;
-                    a.getNumFn && (d = a.getNumFn());
-                    var f = (a.number - d) / c;
-                    this.scrollTimer = setInterval(function () {
-                        0 < c
-                            ? (c--,
-                              b.Scroll2({
-                                  number: (d += f),
-                                  getNumFn: a.getNumFn,
-                                  setNumFn: a.setNumFn,
-                              }))
-                            : (clearInterval(b.scrollTimer),
-                              (b.scrollTimer = null),
-                              (b.lastOpt = null));
-                    }, 20);
-                };
-                return l;
-            })(
-                (function () {
-                    return function () {
-                        this._KEYS = v;
-                        this._scrollEl = null;
-                        this._focusClassName = "focus";
-                        this._initDis = 20;
-                        this._findFocusType = 1;
-                        this._offsetDistance = 50;
-                        this._longPressTime = 500;
-                        this._limitingEl = null;
-                        this._distanceToCenter = !1;
-                        this.eventDisabled = "";
-                        this.focusOriginalEl = this.focusOriginalSize = this.lastOpt = this.scrollTimer = null;
-                    };
-                })()
-            )
-        )
-    );
-    z.default = new D();
+            return __extends(t, e), t
+        }(function (e) {
+            function t() {
+                var t = null !== e && e.apply(this, arguments) || this;
+                return t.hasClass = function (e, t) {
+                    return e.classList.contains(t)
+                }, t.toggleClass = function (e, t) {
+                    return e.classList.toggle(t)
+                }, t.getParentTag = function (e, n) {
+                    return void 0 === n && (n = []), e instanceof HTMLElement ? "BODY" !== e.parentElement.nodeName ? (n.push(e.parentElement), t.getParentTag(e.parentElement, n)) : n : void 0
+                }, t.parentShow = function (e) {
+                    return 0 === t.getParentTag(e).filter((function (e) {
+                        return "none" === window.getComputedStyle(e).display
+                    })).length
+                }, t.removeOneClassName = function (e, n) {
+                    e && t.hasClass(e, n) && t.toggleClass(e, n)
+                }, t.getElementByPath = function (e) {
+                    return document.evaluate(e, document).iterateNext()
+                }, t.getElementsByPath = function (e) {
+                    var t = [],
+                        n = (e = document.evaluate(e, document, null, XPathResult.ANY_TYPE, null)).iterateNext();
+                    for (n && t.push(n); n;)(n = e.iterateNext()) && t.push(n);
+                    return t
+                }, t.addClassName = function (e, n) {
+                    e && t.toggleClass(e, n)
+                }, t.addAttrName = function (e, n) {
+                    t.focusOriginalEl !== e && (t.focusOriginalSize = e.getBoundingClientRect(), t.focusOriginalEl = e);
+                    var o = document.querySelector("[focused]");
+                    o && (o.removeAttribute(n), t.removeOneClassName(o, t._focusClassName)), e.setAttribute(n, ""), "focused" === n && (t.addClassName(e, t._focusClassName), e.dispatchEvent(new CustomEvent("onFocus", {
+                        detail: {
+                            el: e
+                        }
+                    })))
+                }, t.inNode = function (e, t) {
+                    return t !== e && t.contains(e)
+                }, t.preventDefault = function (e) {
+                    (e = e || window.event).preventDefault && e.preventDefault(), e.returnValue = !1
+                }, t.onEvent = function (e, t, n) {
+                    return e.dispatchEvent(new CustomEvent(t, {
+                        detail: n
+                    }))
+                }, t.offEvent = function (e, t, n, o) {
+                    return void 0 === o && (o = !1), e.removeEventListener(t, n, o)
+                }, t
+            }
+            return __extends(t, e), t.prototype.Scroll2 = function (e) {
+                var t = this;
+                if (!e.time) return e.setNumFn && e.setNumFn(e.number), e.number;
+                null != this.scrollTimer && (clearInterval(this.scrollTimer), this.lastOpt.setNumFn && this.lastOpt.setNumFn(this.lastOpt.number)), this.lastOpt = e;
+                var n = e.time / 20,
+                    o = 0;
+                e.getNumFn && (o = e.getNumFn());
+                var l = (e.number - o) / n;
+                this.scrollTimer = setInterval((function () {
+                    0 < n ? (n--, t.Scroll2({
+                        number: o += l,
+                        getNumFn: e.getNumFn,
+                        setNumFn: e.setNumFn
+                    })) : (clearInterval(t.scrollTimer), t.scrollTimer = null, t.lastOpt = null)
+                }), 20)
+            }, t
+        }((function () {
+            this._KEYS = t, this._scrollEl = null, this._focusClassName = "focus", this._initDis = 20, this._findFocusType = 1, this._offsetDistance = 50, this._longPressTime = 500, this._limitingEl = null, this._distanceToCenter = !1, this.eventDisabled = "", this.focusOriginalEl = this.focusOriginalSize = this.lastOpt = this.scrollTimer = null
+        }))));
+    e.default = new c
 };
 let _focusable = {};
 defineFocusable(_focusable);
 const focusable = _focusable.default;
-document.removeEventListener("keydown", focusable.focusKeyDownEvent, !1);
-document.addEventListener("keydown", focusable.focusKeyDownEvent);
-document.removeEventListener("keyup", focusable.focusKeyUpEvent, !1);
-document.addEventListener("keyup", focusable.focusKeyUpEvent);
+document.removeEventListener("keydown", focusable.focusKeyDownEvent, !1), document.addEventListener("keydown", focusable.focusKeyDownEvent), document.removeEventListener("keyup", focusable.focusKeyUpEvent, !1), document.addEventListener("keyup", focusable.focusKeyUpEvent);
