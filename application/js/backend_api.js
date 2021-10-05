@@ -69,7 +69,9 @@ const BackendApi = (() => {
                 .catch((error) => {
                     statusCallback("First Server wasn't reachable, trying backup");
                     console.error(error);
-                    fetchData(server_info.proxy + server_list[1]).then(done).catch(reject);
+                    fetchData(server_info.proxy + server_list[1])
+                        .then(done)
+                        .catch(reject);
                 });
         });
     }
