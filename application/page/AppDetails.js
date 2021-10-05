@@ -66,7 +66,7 @@ define(["app"], (App) => {
                             [
                                 h("img", {
                                     class: "Icon",
-                                    domProps: { src: this.data.icon },
+                                    domProps: { src: server_info.proxy + this.data.icon },
                                 }),
                                 h("div", { class: "Name" }, this.data.name),
                                 h("div", { class: "Tags flex-h" }, [
@@ -153,7 +153,7 @@ define(["app"], (App) => {
                                                               App.startPage({
                                                                   name: "Album",
                                                                   params: {
-                                                                      items: this.data.screenshots,
+                                                                      items: server_info.proxy + this.data.screenshots,
                                                                       index: index,
                                                                   },
                                                               });

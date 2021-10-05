@@ -167,7 +167,7 @@ define(["app"], (App) => {
                                     [
                                         h("img", {
                                             class: "Icon",
-                                            domProps: { src: item.icon },
+                                            domProps: { src: server_info.proxy + item.icon },
                                         }),
                                         h("div", { class: "Right flex-v flex-1" }, [
                                             h("div", { class: "Title ellipsis" }, item.name),

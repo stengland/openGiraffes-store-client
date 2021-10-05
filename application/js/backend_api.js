@@ -1,4 +1,4 @@
-const LastUpdateFile = server_info.LastUpdateFile;
+const LastUpdateFile = server_info.proxy + server_info.LastUpdateFile;
 
 const server_list = server_info.server_list;
 
@@ -64,12 +64,12 @@ const BackendApi = (() => {
                     reject(error);
                 }
             };
-            fetchData(server_list[0])
+            fetchData(server_info.proxy + server_list[0])
                 .then(done)
                 .catch((error) => {
                     statusCallback("First Server wasn't reachable, trying backup");
                     console.error(error);
-                    fetchData(server_list[1]).then(done).catch(reject);
+                    fetchData(server_info.proxy + server_list[1]).then(done).catch(reject);
                 });
         });
     }
