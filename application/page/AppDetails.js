@@ -138,7 +138,7 @@ define(["app"], (App) => {
                                               this.data.screenshots.map((o, index) => {
                                                   return h("img", {
                                                       class: "Item",
-                                                      domProps: { src: o },
+                                                      domProps: { src: server_info.proxy + o },
                                                       attrs: {
                                                           focusable: true,
                                                       },
