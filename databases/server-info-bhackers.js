@@ -5,5 +5,4 @@ const server_info = {
     SimpleRatingServer: "https://bhackers.uber.space/srs/v1",
     QR_header: "bhackers:",
     terms: "https://github.com/bananahackers/store-db/blob/master/TERMS.md",
-    proxy: "https://kaios.tri1.workers.dev/?url=",
 };

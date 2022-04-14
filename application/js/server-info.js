@@ -5,5 +5,4 @@ const server_info = {
     SimpleRatingServer: "https://liaronce.top",
     QR_header: "opengiraffes:",
     terms: "https://docs.opengiraffes.top/#/store/terms",
-    proxy: "https://kaios.tri1.workers.dev/?url=",
 };
